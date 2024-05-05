@@ -86,7 +86,7 @@ struct PasswordTextView: View {
                     secureText = ""
                 } label: {
                     Image(systemName: "multiply.circle.fill")
-                        .foregroundColor(.gray)
+                        .foregroundColor(layout.displayTextForegroundColor)
                 }
                 .buttonStyle(.plain)
             }
@@ -94,7 +94,13 @@ struct PasswordTextView: View {
                 Button {
                     isShowSecure.toggle()
                 } label: {
-                    isShowSecure ? showSecureImage : hideSecureImage
+                    if isShowSecure {
+                        hideSecureImage
+                            .foregroundColor(layout.displayTextForegroundColor)
+                    } else {
+                        showSecureImage
+                            .foregroundColor(layout.displayTextForegroundColor)
+                    }
                 }
                 .buttonStyle(.plain)
             }
@@ -213,6 +219,17 @@ extension PasswordTextView {
                 placeholder: "8 to 16 half-width alphanumeric characters.",
                 keyboardType: .asciiCapableNumberPad,
                 hasInputTextDisplayButton: false, 
+                backgroundColor: .gray,
+                hasBorder: false
+            )
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                placeholder: "8 to 16 half-width alphanumeric characters.",
+                keyboardType: .asciiCapableNumberPad,
+                hasInputTextDisplayButton: false,
                 backgroundColor: .gray,
                 hasBorder: false
             )
