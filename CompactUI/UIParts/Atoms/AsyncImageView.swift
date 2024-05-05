@@ -96,7 +96,7 @@ extension AsyncImageView {
 #Preview {
     VStack {
         AsyncImageView(
-            urlString: "https://img.freepik.com/free-photo/student-female-hands-performing-a-written-task-in-a-copybook_1163-2552.jpg?w=1800&t=st=1713667444~exp=1713668044~hmac=ba5831ca84c6e213d3e18ad58ae04196d486be41a9e00ac8911f1b2895caa994",
+            urlString: "https://aaaaaaaaaaaaa.com",
             layout: AsyncImageView.Layout(
                 borderColor: .green,
                 borderWidth: 2
