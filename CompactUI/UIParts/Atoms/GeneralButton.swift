@@ -68,16 +68,20 @@ extension GeneralButton {
         GeneralButton(
             layout: GeneralButton.Layout(
                 text: "Sign up",
-                height: 40
+                height: 40,
+                textForegroundColor: .white,
+                backgroundColor: .mint,
+                hasBorder: true
             ), tapAction: { }
         )
         GeneralButton(
             layout: GeneralButton.Layout(
-                text: "Sign in",
+                text: "I have an account, so sign in.",
                 height: 40,
                 textForegroundColor: .gray,
+                hasTextUnderLine: true,
                 backgroundColor: .clear,
-                hasBorder: true
+                hasBorder: false
             ), tapAction: { }
         )
     }

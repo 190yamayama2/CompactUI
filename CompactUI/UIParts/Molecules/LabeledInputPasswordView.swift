@@ -117,15 +117,28 @@ extension LabeledInputPasswordView {
 
 // MARK: - Preview
 #Preview {
-    LabeledInputPasswordView(
-        layout: LabeledInputPasswordView.Layout(
-            labelText: "Please enter password.",
-            passwordText: "",
-            alignment: .vertical,
-            labelLayout: BaseLabelLayout(textForegroundColor: .gray),
-            passwordLayout: PasswordTextView.Layout(
-                placeholder: "8 to 16 half-width alphanumeric characters."
+    VStack {
+        LabeledInputPasswordView(
+            layout: LabeledInputPasswordView.Layout(
+                labelText: "Please enter password.",
+                passwordText: "",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(textForegroundColor: .gray),
+                passwordLayout: PasswordTextView.Layout(
+                    placeholder: "8 to 16 half-width alphanumeric characters."
+                )
             )
         )
-    )
+        LabeledInputPasswordView(
+            layout: LabeledInputPasswordView.Layout(
+                labelText: "Please enter password.",
+                passwordText: "",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(textForegroundColor: .gray),
+                passwordLayout: PasswordTextView.Layout(
+                    placeholder: "8 to 16 half-width alphanumeric characters."
+                )
+            )
+        )
+    }
 }

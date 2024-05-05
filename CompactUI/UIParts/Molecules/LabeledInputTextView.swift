@@ -108,17 +108,32 @@ extension LabeledInputTextView {
 
 // MARK: - Preview
 #Preview {
-    LabeledInputTextView(
-        layout: LabeledInputTextView.Layout(
-            labelText: "Please enter account id.",
-            inputText: "",
-            alignment: .horizontal,
-            labelLayout: BaseLabelLayout(
-                textForegroundColor: .gray
-            ),
-            textLayout: TextView.Layout(
-                placeholder: "Please enter your name."
+    VStack {
+        LabeledInputTextView(
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                inputText: "",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: TextView.Layout(
+                    placeholder: "Please enter your name."
+                )
             )
         )
-    )
+        LabeledInputTextView(
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                inputText: "",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: TextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            )
+        )
+    }
 }
