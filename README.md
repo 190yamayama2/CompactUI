@@ -1,6 +1,3 @@
-# ・・・　Under maintenance ・・・
-
-
 
 # CompactUI
 
@@ -52,45 +49,97 @@ public static var secondaryFontUIColor: UIColor = .gray
 
 ## TextView sample
 
-<img width="404" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/22060203-7ba1-4778-bba9-cdafc8539e74">
+| iOS | MacOS |
+| --- | --- |
+| <img width="404" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/22060203-7ba1-4778-bba9-cdafc8539e74"> | <img width="607" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/da619370-0e42-4734-b494-0e8217371b72"> |
 
 ```swift
 TextView(
     text: "",
     layout: TextView.Layout(
-        placeholder: "Please enter your name.",
         maxLength: 16,
+        placeholder: "Please enter your name.",
         hasBorder: true
-    )
-) 
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
+)
+TextView(
+    text: "",
+    layout: TextView.Layout(
+        maxLength: 16,
+        placeholder: "Please enter your name.",
+        hasBorder: false
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
+)
 ```
 
 ## PasswordTextView sample
 
-<img width="402" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/dc65f760-b2db-4e3a-ac4f-9c988cb11c0d">
+| iOS | MacOS |
+| --- | --- |
+| <img width="298" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/8e303e90-6ef8-4b4c-b977-a544bdaef2cf"> | <img width="603" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/882f33cb-c98d-496e-83c9-6cbe3b9e788f"> |
 
 ```swift
 PasswordTextView(
     secureText: "",
     layout: PasswordTextView.Layout(
-        placeholder: "8 to 16 half-width alphanumeric characters.",
-        keyboardType: .asciiCapableNumberPad,
-        hasInputTextDisplayButton: true
-    )
+        hasInputTextDisplayButton: true,
+        placeholder: "8 to 16 half-width alphanumeric characters."
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
+.environment(\.colorScheme, .dark)
 PasswordTextView(
     secureText: "",
     layout: PasswordTextView.Layout(
-        placeholder: "8 to 16 half-width alphanumeric characters.",
-        keyboardType: .asciiCapableNumberPad,
-        hasInputTextDisplayButton: false
-    )
+        hasInputTextDisplayButton: false,
+        placeholder: "8 to 16 half-width alphanumeric characters."
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
+.environment(\.colorScheme, .dark)
+PasswordTextView(
+    secureText: "",
+    layout: PasswordTextView.Layout(
+        hasInputTextDisplayButton: false,
+        placeholder: "8 to 16 half-width alphanumeric characters.",
+        backgroundColor: .gray,
+        hasBorder: false
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
+)
+.environment(\.colorScheme, .dark)
+PasswordTextView(
+    secureText: "",
+    layout: PasswordTextView.Layout(
+        hasInputTextDisplayButton: false,
+        placeholder: "8 to 16 half-width alphanumeric characters.",
+        backgroundColor: .gray,
+        hasBorder: false
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
+)
+.environment(\.colorScheme, .dark)
 ```
 
 ## GeneralButton sample
 
-<img width="400" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/2b591bbf-91cd-4b84-b796-e63c7a610f01">
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/79847d5f-9774-4f34-86c3-d3fbc3c06d93"> | <img width="602" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/6057a1d5-ee2e-4351-af3f-7abfbd498b56"> |
 
 ```swift
 GeneralButton(
@@ -98,9 +147,24 @@ GeneralButton(
         text: "Sign up",
         height: 40,
         textForegroundColor: .white,
-        backgroundColor: .mint,
+        hasTextUnderLine: true,
+        backgroundColor: .gray,
         hasBorder: true
-    ), tapAction: { }
+    ), tapAction: {
+        print("tapped.")
+    }
+)
+GeneralButton(
+    layout: GeneralButton.Layout(
+        text: "Sign up",
+        height: 40,
+        textForegroundColor: .white,
+        hasTextUnderLine: false,
+        backgroundColor: .gray,
+        hasBorder: true
+    ), tapAction: {
+        print("tapped.")
+    }
 )
 GeneralButton(
     layout: GeneralButton.Layout(
@@ -110,13 +174,29 @@ GeneralButton(
         hasTextUnderLine: true,
         backgroundColor: .clear,
         hasBorder: false
-    ), tapAction: { }
+    ), tapAction: {
+        print("tapped.")
+    }
+)
+GeneralButton(
+    layout: GeneralButton.Layout(
+        text: "I have an account, so sign in.",
+        height: 40,
+        textForegroundColor: .gray,
+        hasTextUnderLine: false,
+        backgroundColor: .clear,
+        hasBorder: false
+    ), tapAction: {
+        print("tapped.")
+    }
 )
 ```
 
 ## StaticImageView sample
 
-<img width="397" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/f303937e-c75f-4e18-9c57-a58cc8878bd6">
+| iOS | MacOS |
+| --- | --- |
+| <img width="397" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/f303937e-c75f-4e18-9c57-a58cc8878bd6"> | <img width="605" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/7c44f895-0a91-4ad8-a06c-ce7b697a6f12"> |
 
 ```swift
 StaticImageView(
@@ -130,7 +210,7 @@ StaticImageView(
 StaticImageView(
     image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
     layout: StaticImageView.Layout(
-        backgroundColor: .cyan,
+        backgroundColor: .green,
         hasBorder: false
     )
 )
@@ -138,7 +218,9 @@ StaticImageView(
 
 ## AsyncImageView sample
 
-<img width="398" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/7158198f-8f97-4663-8e5f-b80c487b6dea">
+| iOS | MacOS |
+| --- | --- |
+| <img width="280" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/abd91bf0-fb18-40ca-ac5a-4f1f18d12247"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/c48ceb9c-bd8e-4dff-a54f-937f4a16530f"> |
 
 ```swift
 AsyncImageView(
@@ -160,7 +242,9 @@ AsyncImageView(
 
 ## LabeledInputTextView sample
 
-<img width="399" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/046aade6-52f4-4185-8195-b689bce7591c">
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/8708588a-2a92-4ee9-8734-aef4a138f744"> | <img width="611" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/df1cce0d-18b5-430a-a5cd-60d707651366"> |
 
 ```swift
 LabeledInputTextView(
@@ -174,7 +258,10 @@ LabeledInputTextView(
         textLayout: TextView.Layout(
             placeholder: "Please enter your name."
         )
-    )
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
 LabeledInputTextView(
     layout: LabeledInputTextView.Layout(
@@ -187,13 +274,18 @@ LabeledInputTextView(
         textLayout: TextView.Layout(
             placeholder: "Please enter your name."
         )
-    )
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
 ```
 
 ## LabeledInputPasswordView sample
 
-<img width="397" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/5623a22f-c86f-4d41-be3b-7624e3502f56">
+| iOS | MacOS |
+| --- | --- |
+| <img width="297" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/24c82322-0e68-458a-ad24-6d8d03024b8a"> | <img width="611" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/f030bf47-ff14-49c7-ad73-0dc665b0727c"> |
 
 ```swift
 LabeledInputPasswordView(
@@ -205,7 +297,10 @@ LabeledInputPasswordView(
         passwordLayout: PasswordTextView.Layout(
             placeholder: "8 to 16 half-width alphanumeric characters."
         )
-    )
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
 LabeledInputPasswordView(
     layout: LabeledInputPasswordView.Layout(
@@ -216,28 +311,20 @@ LabeledInputPasswordView(
         passwordLayout: PasswordTextView.Layout(
             placeholder: "8 to 16 half-width alphanumeric characters."
         )
-    )
+    ),
+    onSubmitText: { value  in
+        print(value)
+    }
 )
 ```
 
 ## LabeledSegmentPickerView sample
 
-<img width="396" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/21c6783f-b297-4bb6-a49c-92fb11b82336">
+| iOS | MacOS |
+| --- | --- |
+| <img width="297" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/d3e1a9dd-1392-44b5-bacf-b694083f6521"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/24367030-c47e-4442-88f5-d22f8fa9f119"> |
 
 ```swift
-LabeledSegmentPickerView(
-    selectedKey: "",
-    labelText: "Language",
-    items: [
-        (key: "default", value: "System"),
-        (key: "en", value: "English"),
-        (key: "jp", value: "Japanese")
-    ],
-    layout: LabeledSegmentPickerView.Layout(
-        titleTextColor: .green,
-        titleAlignment: .leading
-    )
-)
 LabeledSegmentPickerView(
     selectedKey: "default",
     labelText: "Language",
@@ -247,9 +334,16 @@ LabeledSegmentPickerView(
         (key: "jp", value: "Japanese")
     ],
     layout: LabeledSegmentPickerView.Layout(
-        titleTextColor: .green,
-        titleAlignment: .leading
-    )
+        alignment: .vertical,
+        titleTextColor: .gray,
+        titleAlignment: .leading,
+        segmentSelectedTextColor: .white,
+        segmentBackgroundColor: .blue,
+        backgroundColor: .red
+    ),
+    onSelected: { value in
+        print(value)
+    }
 )
 LabeledSegmentPickerView(
     selectedKey: "en",
@@ -260,10 +354,16 @@ LabeledSegmentPickerView(
         (key: "jp", value: "Japanese")
     ],
     layout: LabeledSegmentPickerView.Layout(
-        titleTextColor: .red,
+        alignment: .vertical,
+        titleTextColor: .gray,
         titleAlignment: .center,
-        backgroundColor: .green
-    )
+        segmentSelectedTextColor: .white,
+        segmentBackgroundColor: .blue,
+        backgroundColor: .red
+    ),
+    onSelected: { value in
+        print(value)
+    }
 )
 LabeledSegmentPickerView(
     selectedKey: "jp",
@@ -274,32 +374,18 @@ LabeledSegmentPickerView(
         (key: "jp", value: "Japanese")
     ],
     layout: LabeledSegmentPickerView.Layout(
-        titleTextColor: .blue,
+        alignment: .vertical,
+        titleTextColor: .gray,
         titleAlignment: .trailing,
-        backgroundColor: .green
-    )
+        segmentSelectedTextColor: .white,
+        segmentBackgroundColor: .blue,
+        backgroundColor: .red
+    ),
+    onSelected: { value in
+        print(value)
+    }
 )
-```
-
-## LabeledWheelPickerView sample
-
-<img width="397" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/b3b0ca10-9cee-442d-b88d-56ce2d5eca98">
-
-```swift
-LabeledWheelPickerView(
-    selectedKey: "jp",
-    labelText: "Language",
-    items: [
-        (key: "default", value: "System"),
-        (key: "en", value: "English"),
-        (key: "jp", value: "Japanese")
-    ],
-    pickerViewStyle: .inline,
-    layout: LabeledWheelPickerView.Layout(
-        alignment: .horizontal
-    )
-)
-LabeledWheelPickerView(
+LabeledSegmentPickerView(
     selectedKey: "default",
     labelText: "Language",
     items: [
@@ -307,18 +393,93 @@ LabeledWheelPickerView(
         (key: "en", value: "English"),
         (key: "jp", value: "Japanese")
     ],
-    pickerViewStyle: .wheel,
+    pickerViewStyle: .palette,
+    layout: LabeledSegmentPickerView.Layout(
+        alignment: .horizontal,
+        titleTextColor: .gray,
+        titleAlignment: .center,
+        segmentSelectedTextColor: .white, 
+        segmentBackgroundColor: .blue,
+        backgroundColor: .red
+    ),
+    onSelected: { value in
+        print(value)
+    }
+)
+```
+
+## LabeledInlinePickerView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="298" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/de8572ef-49fc-46ce-835f-bb91ee7adb24"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/692bd8ad-d18b-46e3-945d-0a62cdb32ce2"> |
+
+```swift
+LabeledInlinePickerView(
+    selectedKey: "default",
+    labelText: "Language",
+    items: [
+        (key: "default", value: "System"),
+        (key: "en", value: "English"),
+        (key: "jp", value: "Japanese")
+    ],
+    layout: LabeledWheelPickerView.Layout(
+        alignment: .horizontal
+    ),
+    onSelected: { value in
+        print(value)
+    }
+)
+LabeledInlinePickerView(
+    selectedKey: "default",
+    labelText: "Language",
+    items: [
+        (key: "default", value: "System"),
+        (key: "en", value: "English"),
+        (key: "jp", value: "Japanese")
+    ],
     layout: LabeledWheelPickerView.Layout(
         alignment: .vertical
-    )
+    ),
+    onSelected: { value in
+        print(value)
+    }
 )
 ```
 
 ## LabeledDropdownListView sample
 
-<img width="399" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/6e9e38db-5223-4161-8da9-bc1ab4e987d0">
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/6107fad2-398d-4ebc-84b1-8f65e2b9c5bb"> | <img width="605" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/41c40d6b-ea8a-4858-a457-cd989eb74eb3"> |
 
 ```swift
+LabeledDropdownListView(
+    selectedKey: "default",
+    labelText: "Language",
+    items: [
+        (key: "default", value: "System"),
+        (key: "en", value: "English"),
+        (key: "jp", value: "Japanese")
+    ],
+    layout: LabeledDropdownListView.Layout(
+        alignment: .vertical,
+        titleAlignment: .leading
+    )
+)
+LabeledDropdownListView(
+    selectedKey: "en",
+    labelText: "Language",
+    items: [
+        (key: "default", value: "System"),
+        (key: "en", value: "English"),
+        (key: "jp", value: "Japanese")
+    ],
+    layout: LabeledDropdownListView.Layout(
+        alignment: .vertical,
+        titleAlignment: .center
+    )
+)
 LabeledDropdownListView(
     selectedKey: "jp",
     labelText: "Language",
@@ -328,7 +489,8 @@ LabeledDropdownListView(
         (key: "jp", value: "Japanese")
     ],
     layout: LabeledDropdownListView.Layout(
-        alignment: .horizontal
+        alignment: .vertical,
+        titleAlignment: .trailing
     )
 )
 LabeledDropdownListView(
@@ -340,7 +502,7 @@ LabeledDropdownListView(
         (key: "jp", value: "Japanese")
     ],
     layout: LabeledDropdownListView.Layout(
-        alignment: .vertical
+        alignment: .horizontal
     )
 )
 ```
