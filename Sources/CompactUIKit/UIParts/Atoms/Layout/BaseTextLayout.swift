@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class BaseTextLayout: BaseLayout {
+public class BaseTextLayout: BaseLayout {
 
     // MARK: - Properties
 
@@ -19,7 +19,7 @@ class BaseTextLayout: BaseLayout {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         textFont: Font = LayoutDefault.primaryFont,
         textForegroundColor: Color = LayoutDefault.primaryFontColor,
         placeholder: String = "",
@@ -53,7 +53,7 @@ class BaseTextLayout: BaseLayout {
         )
     }
 
-    init(
+    public init(
         layout: BaseTextLayout
     ) {
         self.placeholder = layout.placeholder

@@ -8,19 +8,19 @@
 
 import SwiftUI
 #if os (OSX)
-typealias XColor = NSColor
-typealias XImage = NSImage
-typealias XFont = NSFont
+public typealias XColor = NSColor
+public typealias XImage = NSImage
+public typealias XFont = NSFont
 #elseif os(iOS)
-typealias XColor = UIColor
-typealias XImage = UIImage
-typealias XFont = UIFont
+public typealias XColor = UIColor
+public typealias XImage = UIImage
+public typealias XFont = UIFont
 #endif
 
 /// LayoutDefault
 /// This struct is a struct that collectively defines the standard layout.
 /// Even if you define it here, you can override it individually in each component's initializer.
-struct LayoutDefault {
+public struct LayoutDefault {
 
     /// Default topMargin
     public static var topMargin: CGFloat = 16.0
@@ -75,12 +75,9 @@ struct LayoutDefault {
 extension LayoutDefault {
     public static var isDarkMode: Bool {
 #if canImport(UIKit)
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-            return true
-        } else {
-            return false
-        }
+        return UITraitCollection.current.userInterfaceStyle == .dark
+#else
+        return NSApplication.shared.effectiveAppearance.name == .darkAqua
 #endif
-        return false
     }
 }

@@ -21,7 +21,7 @@ public struct TextView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         text: String,
         layout: Layout = Layout(),
         onSubmitText: @escaping ((String) -> Void)
@@ -73,7 +73,7 @@ public struct TextView: View {
 extension TextView {
 
     /// InputTextField Layout
-    final class Layout: BaseTextLayout {
+    final public class Layout: BaseTextLayout {
 
         // MARK: - Property
 
@@ -81,7 +81,7 @@ extension TextView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             maxLength: Int = -1,
             placeholder: String = "",
             placeholderFont: Font = LayoutDefault.secondaryFont,
@@ -117,7 +117,7 @@ extension TextView {
             )
         }
 
-        init(
+        public init(
             layout: Layout
         ) {
             self.maxLength = layout.maxLength

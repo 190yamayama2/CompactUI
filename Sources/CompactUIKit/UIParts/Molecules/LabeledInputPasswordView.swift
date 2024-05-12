@@ -15,7 +15,7 @@ public struct LabeledInputPasswordView: View {
     let layout: Layout
     var onSubmitText: ((String) -> Void)
 
-    init(
+    public init(
         layout: Layout,
         onSubmitText: @escaping (String) -> Void
     ) {
@@ -75,11 +75,11 @@ public struct LabeledInputPasswordView: View {
 // MARK: - Layout
 extension LabeledInputPasswordView {
 
-    final class Layout {
+    final public class Layout {
 
         // MARK: - Enum
 
-        enum LabeleAlignment {
+        public enum LabeleAlignment {
             case horizontal
             case vertical
         }
@@ -96,7 +96,7 @@ extension LabeledInputPasswordView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             labelText: String,
             passwordText: String,
             alignment: LabeleAlignment = .vertical,
@@ -114,7 +114,7 @@ extension LabeledInputPasswordView {
             self.passwordLayout = passwordLayout
         }
 
-        init(
+        public init(
             layout: Layout
         ) {
             self.labelText = layout.labelText

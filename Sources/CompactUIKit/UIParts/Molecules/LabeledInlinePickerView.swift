@@ -12,7 +12,7 @@ public struct LabeledInlinePickerView: View {
 
     // MARK: - Enum
 
-    enum LabeleAlignment {
+    public enum LabeleAlignment {
         case horizontal
         case vertical
     }
@@ -27,7 +27,7 @@ public struct LabeledInlinePickerView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         selectedKey: String,
         labelText: String,
         items: [(key: String, value: String)],
@@ -204,7 +204,7 @@ public struct LabeledInlinePickerView: View {
 
 // MARK: - Layout
 extension LabeledInlinePickerView {
-    final class Layout: BaseLayout {
+    final public class Layout: BaseLayout {
 
         // MARK: - Properties
 
@@ -218,9 +218,9 @@ extension LabeledInlinePickerView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             alignment: LabeleAlignment = .horizontal,
-            textFont: Font = LayoutDefault.primaryFont,
+            titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
             titleAlignment: HorizontalAlignment = .leading,
             selectionTextColor: Color = LayoutDefault.secondaryFontColor,
@@ -237,7 +237,7 @@ extension LabeledInlinePickerView {
             cornerRadius: CGFloat = LayoutDefault.cornerRadius
         ) {
             self.alignment = alignment
-            self.titleTextFont = textFont
+            self.titleTextFont = titleTextFont
             self.titleTextColor = titleTextColor
             self.titleAlignment = titleAlignment
             self.selectionTextColor = selectionTextColor
@@ -256,7 +256,31 @@ extension LabeledInlinePickerView {
             )
         }
 
+        public init(
+            layout: Layout
+        ) {
+            self.alignment = layout.alignment
+            self.titleTextFont = layout.titleTextFont
+            self.titleTextColor = layout.titleTextColor
+            self.titleAlignment = layout.titleAlignment
+            self.selectionTextColor = layout.selectionTextColor
+            self.selectionTextFont = layout.selectionTextFont
+            self.selectionBackgroundColor = layout.selectionBackgroundColor
+            super.init(
+                topMargin: layout.topMargin,
+                leftMargin: layout.leftMargin,
+                rightMargin: layout.rightMargin,
+                bottomMargin: layout.bottomMargin,
+                backgroundColor: layout.backgroundColor,
+                hasBorder: layout.hasBorder,
+                borderColor: layout.borderColor,
+                borderWidth: layout.borderWidth,
+                cornerRadius: layout.cornerRadius
+            )
+        }
+
     }
+
 }
 
 // MARK: - Preview

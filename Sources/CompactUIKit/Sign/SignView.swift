@@ -12,7 +12,7 @@ public struct SignView: View {
 
     // MARK: - Enum
 
-    enum Mode {
+    public enum Mode {
         case signIn
         case signUp
     }
@@ -21,6 +21,13 @@ public struct SignView: View {
 
     @State var mode: Mode
     let layout: Layout
+
+    // MARK: - Initializer
+
+    public init(mode: Mode, layout: Layout) {
+        self.mode = mode
+        self.layout = layout
+    }
 
     // MARK: - View
 
@@ -144,7 +151,7 @@ public struct SignView: View {
 // MARK: - Layout
 extension SignView {
 
-    struct Layout {
+    public struct Layout {
 
         // MARK: - Properties
 
@@ -163,7 +170,7 @@ extension SignView {
 
     }
 
-    struct SignInLayout {
+    public struct SignInLayout {
 
         // MARK: - Properties
 
@@ -206,7 +213,7 @@ extension SignView {
 
     }
 
-    struct SignUpLayout {
+    public struct SignUpLayout {
 
         // MARK: - Property
 
@@ -224,7 +231,7 @@ extension SignView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             titleText: String,
             titleFont: Font = .title,
             subTitleText: String = "",

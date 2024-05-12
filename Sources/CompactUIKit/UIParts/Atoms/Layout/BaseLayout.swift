@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class BaseLayout{
+public class BaseLayout{
 
     var topMargin: CGFloat
     var leftMargin: CGFloat
@@ -27,7 +27,7 @@ class BaseLayout{
 
     // MARK: - Initializer
 
-    init(
+    public init(
         topMargin: CGFloat = LayoutDefault.topMargin,
         leftMargin: CGFloat = LayoutDefault.leftMargin,
         rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -49,7 +49,7 @@ class BaseLayout{
         self.cornerRadius = cornerRadius
     }
 
-    init(
+    public init(
         layout: BaseLayout
     ) {
         self.topMargin = layout.topMargin

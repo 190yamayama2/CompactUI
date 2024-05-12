@@ -13,7 +13,7 @@ public struct LabeledDropdownListView: View {
 
     // MARK: - Enum
 
-    enum LabeleAlignment {
+    public enum LabeleAlignment {
         case horizontal
         case vertical
     }
@@ -27,7 +27,7 @@ public struct LabeledDropdownListView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         selectedKey: String,
         labelText: String,
         items: [(key: String, value: String)],
@@ -137,7 +137,7 @@ public struct LabeledDropdownListView: View {
 
 // MARK: - Layout
 extension LabeledDropdownListView {
-    final class Layout: BaseLayout {
+    final public class Layout: BaseLayout {
 
         // MARK: - Properties
 
@@ -151,9 +151,9 @@ extension LabeledDropdownListView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             alignment: LabeleAlignment = .horizontal,
-            textFont: Font = LayoutDefault.primaryFont,
+            titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
             titleAlignment: HorizontalAlignment = .leading,
             selectionTextColor: Color = LayoutDefault.secondaryFontColor,
@@ -170,7 +170,7 @@ extension LabeledDropdownListView {
             cornerRadius: CGFloat = LayoutDefault.cornerRadius
         ) {
             self.alignment = alignment
-            self.titleTextFont = textFont
+            self.titleTextFont = titleTextFont
             self.titleTextColor = titleTextColor
             self.titleAlignment = titleAlignment
             self.selectionTextColor = selectionTextColor
@@ -186,6 +186,29 @@ extension LabeledDropdownListView {
                 borderColor: borderColor,
                 borderWidth: borderWidth,
                 cornerRadius: cornerRadius
+            )
+        }
+
+        public init(
+            layout: Layout
+        ) {
+            self.alignment = layout.alignment
+            self.titleTextFont = layout.titleTextFont
+            self.titleTextColor = layout.titleTextColor
+            self.titleAlignment = layout.titleAlignment
+            self.selectionTextColor = layout.selectionTextColor
+            self.selectionTextFont = layout.selectionTextFont
+            self.selectionBackgroundColor = layout.selectionBackgroundColor
+            super.init(
+                topMargin: layout.topMargin,
+                leftMargin: layout.leftMargin,
+                rightMargin: layout.rightMargin,
+                bottomMargin: layout.bottomMargin,
+                backgroundColor: layout.backgroundColor,
+                hasBorder: layout.hasBorder,
+                borderColor: layout.borderColor,
+                borderWidth: layout.borderWidth,
+                cornerRadius: layout.cornerRadius
             )
         }
 

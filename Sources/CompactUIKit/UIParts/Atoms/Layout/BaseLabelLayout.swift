@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-class BaseLabelLayout: BaseLayout {
+public class BaseLabelLayout: BaseLayout {
 
     let textFont: Font
     let textForegroundColor: Color
 
     // MARK: - Initializer
 
-    init(
+    public init(
         textFont: Font = LayoutDefault.primaryFont,
         textForegroundColor: Color = LayoutDefault.primaryFontColor,
         topMargin: CGFloat = LayoutDefault.topMargin,
@@ -43,7 +43,7 @@ class BaseLabelLayout: BaseLayout {
         )
     }
 
-    init(
+    public init(
         layout: BaseLabelLayout
     ) {
         self.textFont = layout.textFont

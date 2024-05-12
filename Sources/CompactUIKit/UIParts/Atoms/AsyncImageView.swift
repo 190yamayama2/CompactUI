@@ -20,7 +20,7 @@ public struct AsyncImageView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         urlString: String,
         layout: Layout,
         cachePolicy: URLRequest.CachePolicy = .returnCacheDataElseLoad,
@@ -109,7 +109,7 @@ public struct AsyncImageView: View {
 
 // MARK: - Layout
 extension AsyncImageView {
-    final class Layout: BaseLayout {
+    final public class Layout: BaseLayout {
     }
 }
 #Preview {
