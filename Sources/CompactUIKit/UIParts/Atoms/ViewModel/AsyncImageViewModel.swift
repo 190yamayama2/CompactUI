@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-final class AsyncImageViewModel: ObservableObject {
+final public class AsyncImageViewModel: ObservableObject {
 
     // MARK: - Properties
 
@@ -18,7 +18,7 @@ final class AsyncImageViewModel: ObservableObject {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         url: String,
         cachePolicy: URLRequest.CachePolicy = .returnCacheDataElseLoad
     ) {

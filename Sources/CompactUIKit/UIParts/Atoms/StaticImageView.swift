@@ -17,7 +17,7 @@ public struct StaticImageView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         image: Image,
         layout: Layout
     ) {
@@ -58,7 +58,7 @@ public struct StaticImageView: View {
 
 // MARK: - Layout
 extension StaticImageView {
-    final class Layout: BaseLayout {
+    final public class Layout: BaseLayout {
     }
 }
 

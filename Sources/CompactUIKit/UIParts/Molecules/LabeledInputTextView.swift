@@ -12,7 +12,7 @@ public struct LabeledInputTextView: View {
     let layout: Layout
     var onSubmitText: ((String) -> Void)
 
-    init(
+    public init(
         layout: Layout,
         onSubmitText: @escaping ((String) -> Void)
     ) {
@@ -68,11 +68,11 @@ public struct LabeledInputTextView: View {
 }
 extension LabeledInputTextView {
 
-    final class Layout {
+    final public class Layout {
 
         // MARK: - Enum
 
-        enum LabeleAlignment {
+        public enum LabeleAlignment {
             case horizontal
             case vertical
         }
@@ -89,7 +89,7 @@ extension LabeledInputTextView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             labelText: String,
             inputText: String,
             alignment: LabeleAlignment = .vertical,
@@ -107,7 +107,7 @@ extension LabeledInputTextView {
             self.textLayout = textLayout
         }
 
-        init(
+        public init(
             layout: Layout
         ) {
             self.labelText = layout.labelText

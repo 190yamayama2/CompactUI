@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class BaseButtonLayout: BaseLayout {
+public class BaseButtonLayout: BaseLayout {
 
     let text: String
     let height: CGFloat
@@ -18,7 +18,7 @@ class BaseButtonLayout: BaseLayout {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         text: String,
         height: CGFloat = 30,
         textFont: Font = LayoutDefault.primaryFont,
@@ -52,7 +52,7 @@ class BaseButtonLayout: BaseLayout {
         )
     }
 
-    init(
+    public init(
         layout: BaseButtonLayout
     ) {
         self.text = layout.text

@@ -15,6 +15,14 @@ public struct GeneralButton: View {
     let layout: Layout
     var tapAction: (() -> Void)
 
+    public init(
+        layout: Layout,
+        tapAction: @escaping () -> Void
+    ) {
+        self.layout = layout
+        self.tapAction = tapAction
+    }
+
     // MARK: - View
 
     public var body: some View {
@@ -124,7 +132,7 @@ public struct GeneralButton: View {
 
 // MARK: - Layout
 extension GeneralButton {
-    final class Layout: BaseButtonLayout { }
+    final public class Layout: BaseButtonLayout { }
 }
 
 // MARK: - Preview

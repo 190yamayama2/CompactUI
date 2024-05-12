@@ -25,7 +25,7 @@ public struct PasswordTextView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         secureText: String,
         layout: Layout = Layout(),
         showSecureImage: Image = Image(systemName: "eye"),
@@ -115,7 +115,7 @@ public struct PasswordTextView: View {
 
 // MARK: - Layout
 extension PasswordTextView {
-    final class Layout: BaseTextLayout {
+    final public class Layout: BaseTextLayout {
 
         // MARK: - Properties
 
@@ -125,7 +125,7 @@ extension PasswordTextView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             maxLength: Int = -1,
             hasInputTextDisplayButton: Bool = false,
             displayTextForegroundColor: Color = .gray,
@@ -165,7 +165,7 @@ extension PasswordTextView {
             )
         }
 
-        init(
+        public init(
             layout: Layout
         ) {
             self.maxLength = layout.maxLength

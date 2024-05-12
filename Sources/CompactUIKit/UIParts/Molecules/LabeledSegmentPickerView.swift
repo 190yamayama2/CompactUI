@@ -15,7 +15,7 @@ public struct LabeledSegmentPickerView: View {
 
     // MARK: - Enum
 
-    enum PickerViewStyle {
+    public enum PickerViewStyle {
         case segmented
         case palette
     }
@@ -31,7 +31,7 @@ public struct LabeledSegmentPickerView: View {
 
     // MARK: - Initializer
 
-    init(
+    public init(
         selectedKey: String,
         labelText: String,
         items: [(key: String, value: String)],
@@ -233,11 +233,11 @@ public struct LabeledSegmentPickerView: View {
 // MARK: - Layout
 extension LabeledSegmentPickerView {
 
-    final class Layout: BaseLayout {
+    final public class Layout: BaseLayout {
 
         // MARK: - Enum
 
-        enum LabeleAlignment {
+        public enum LabeleAlignment {
             case horizontal
             case vertical
         }
@@ -256,7 +256,7 @@ extension LabeledSegmentPickerView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             alignment: LabeleAlignment = .vertical,
             titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
@@ -295,6 +295,31 @@ extension LabeledSegmentPickerView {
                 borderColor: borderColor,
                 borderWidth: borderWidth,
                 cornerRadius: cornerRadius
+            )
+        }
+
+        public init(
+            layout: Layout
+        ) {
+            self.alignment = layout.alignment
+            self.titleTextFont = layout.titleTextFont
+            self.titleTextColor = layout.titleTextColor
+            self.titleAlignment = layout.titleAlignment
+            self.segmentSelectedTextColor = layout.segmentSelectedTextColor
+            self.segmentSelectedTextFont = layout.segmentSelectedTextFont
+            self.segmentNormalTextColor = layout.segmentNormalTextColor
+            self.segmentNormalTextFont = layout.segmentNormalTextFont
+            self.segmentBackgroundColor = layout.segmentBackgroundColor
+            super.init(
+                topMargin: layout.topMargin,
+                leftMargin: layout.leftMargin,
+                rightMargin: layout.rightMargin,
+                bottomMargin: layout.bottomMargin,
+                backgroundColor: layout.backgroundColor,
+                hasBorder: layout.hasBorder,
+                borderColor: layout.borderColor,
+                borderWidth: layout.borderWidth,
+                cornerRadius: layout.cornerRadius
             )
         }
     }
