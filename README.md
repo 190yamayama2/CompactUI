@@ -1,3 +1,6 @@
+![SPM is supported](https://img.shields.io/badge/SPM-Supported-green)
+![Compatible with iOS15 and above](https://img.shields.io/badge/iOS-iOS15_or_later_Supported-green)
+![Compatible with OSX1３ and above](https://img.shields.io/badge/OSX-OSX13_or_later_Supported-green)
 
 # CompactUI
 
