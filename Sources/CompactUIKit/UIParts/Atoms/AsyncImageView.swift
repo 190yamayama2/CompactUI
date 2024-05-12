@@ -6,9 +6,10 @@
 //  
 //
 
+
 import SwiftUI
 
-struct AsyncImageView: View {
+public struct AsyncImageView: View {
 
     // MARK: - Properties
 
@@ -36,14 +37,15 @@ struct AsyncImageView: View {
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .center, content: {
             Spacer().frame(width: layout.topMargin)
             HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, content: {
                 Spacer().frame(width: layout.leftMargin)
                 if let imageData = viewModel.downloadData,
-                   let image = UIImage(data: imageData) {
+                   let image = XImage(data: imageData) {
                     if layout.hasBorder {
+#if os(iOS)
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
@@ -53,12 +55,31 @@ struct AsyncImageView: View {
                                 RoundedRectangle(cornerRadius: layout.cornerRadius)
                                     .stroke(layout.borderColor, lineWidth: layout.borderWidth)
                             )
+#else
+                        Image(nsImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .background(layout.backgroundColor)
+                            .cornerRadius(layout.cornerRadius)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: layout.cornerRadius)
+                                    .stroke(layout.borderColor, lineWidth: layout.borderWidth)
+                            )
+#endif
                     } else {
+#if os(iOS)
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .background(layout.backgroundColor)
                             .cornerRadius(layout.cornerRadius)
+#else
+                        Image(nsImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .background(layout.backgroundColor)
+                            .cornerRadius(layout.cornerRadius)
+#endif
                     }
                 } else {
                     if layout.hasBorder {
@@ -91,9 +112,8 @@ extension AsyncImageView {
     final class Layout: BaseLayout {
     }
 }
-
-
 #Preview {
+#if os(iOS)
     VStack {
         AsyncImageView(
             urlString: "https://aaaaaaaaaaaaa.com",
@@ -109,4 +129,21 @@ extension AsyncImageView {
             )
         )
     }
+#else
+    VStack {
+        AsyncImageView(
+            urlString: "https://aaaaaaaaaaaaa.com",
+            layout: AsyncImageView.Layout(
+                borderColor: .green,
+                borderWidth: 2
+            )
+        )
+        AsyncImageView(
+            urlString: "https://aaaaaaaaaaaaa.co.jp",
+            layout: AsyncImageView.Layout(
+                hasBorder: false
+            )
+        )
+    }
+#endif
 }

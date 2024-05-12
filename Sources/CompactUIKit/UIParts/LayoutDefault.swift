@@ -6,8 +6,16 @@
 //  
 //
 
-import UIKit
 import SwiftUI
+#if os (OSX)
+typealias XColor = NSColor
+typealias XImage = NSImage
+typealias XFont = NSFont
+#elseif os(iOS)
+typealias XColor = UIColor
+typealias XImage = UIImage
+typealias XFont = UIFont
+#endif
 
 /// LayoutDefault
 /// This struct is a struct that collectively defines the standard layout.
@@ -51,25 +59,28 @@ struct LayoutDefault {
     public static var secondaryFontColor: Color = .gray
 
     /// Default primaryUIFont
-    public static var primaryUIFont: UIFont = .systemFont(ofSize: 12.0)
+    public static var primaryUIFont: XFont = .systemFont(ofSize: 12.0)
 
     /// Default primaryFontUIColor
-    public static var primaryFontUIColor: UIColor = .black
+    public static var primaryFontUIColor: XColor = .black
 
     /// Default secondaryUIFont
-    public static var secondaryUIFont: UIFont = .systemFont(ofSize: 10.0)
+    public static var secondaryUIFont: XFont = .systemFont(ofSize: 10.0)
 
     /// Default secondaryFontUIColor
-    public static var secondaryFontUIColor: UIColor = .gray
+    public static var secondaryFontUIColor: XColor = .gray
 
 }
 
 extension LayoutDefault {
     public static var isDarkMode: Bool {
+#if canImport(UIKit)
         if UITraitCollection.current.userInterfaceStyle == .dark {
             return true
         } else {
             return false
         }
+#endif
+        return false
     }
 }

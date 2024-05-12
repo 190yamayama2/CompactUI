@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct TextView: View {
+public struct TextView: View {
 
     // MARK: - State
 
@@ -17,20 +17,23 @@ struct TextView: View {
     // MARK: - Layout Property
 
     let layout: Layout
+    var onSubmitText: ((String) -> Void)
 
     // MARK: - Initializer
 
     init(
         text: String,
-        layout: Layout = Layout()
+        layout: Layout = Layout(),
+        onSubmitText: @escaping ((String) -> Void)
     ) {
         self.text = text
         self.layout = layout
+        self.onSubmitText = onSubmitText
     }
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         if layout.hasBorder {
             textField.padding()
             .overlay(
@@ -57,11 +60,11 @@ struct TextView: View {
             } else {
                 text = formatText
             }
+            onSubmitText(text)
         })
         .clearButton(text: $text)
         .font(layout.textFont)
         .foregroundColor(layout.textForegroundColor)
-        .keyboardType(layout.keyboardType)
     }
 
 }
@@ -79,13 +82,12 @@ extension TextView {
         // MARK: - Initializer
 
         init(
+            maxLength: Int = -1,
             placeholder: String = "",
             placeholderFont: Font = LayoutDefault.secondaryFont,
             placeholderForegroundColor: Color = LayoutDefault.secondaryFontColor,
             textFont: Font = LayoutDefault.primaryFont,
             textForegroundColor: Color = LayoutDefault.primaryFontColor,
-            keyboardType: UIKeyboardType = .default,
-            maxLength: Int = -1,
             topMargin: CGFloat = LayoutDefault.topMargin,
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -103,7 +105,6 @@ extension TextView {
                 placeholder: placeholder,
                 placeholderFont: placeholderFont,
                 placeholderForegroundColor: placeholderForegroundColor,
-                keyboardType: keyboardType,
                 topMargin: topMargin,
                 leftMargin: leftMargin,
                 rightMargin: rightMargin,
@@ -126,7 +127,6 @@ extension TextView {
                 placeholder: layout.placeholder,
                 placeholderFont: layout.placeholderFont,
                 placeholderForegroundColor: layout.placeholderForegroundColor,
-                keyboardType: layout.keyboardType,
                 topMargin: layout.topMargin,
                 leftMargin: layout.leftMargin,
                 rightMargin: layout.rightMargin,
@@ -169,22 +169,55 @@ private struct ClearButton: ViewModifier {
 
 // MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
         TextView(
             text: "",
             layout: TextView.Layout(
-                placeholder: "Please enter your name.",
                 maxLength: 16,
+                placeholder: "Please enter your name.",
                 hasBorder: true
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
         TextView(
             text: "",
             layout: TextView.Layout(
-                placeholder: "Please enter your name.",
                 maxLength: 16,
+                placeholder: "Please enter your name.",
                 hasBorder: false
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
     }
+#else
+    VStack {
+        TextView(
+            text: "",
+            layout: TextView.Layout(
+                maxLength: 16,
+                placeholder: "Please enter your name.",
+                hasBorder: true
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        TextView(
+            text: "",
+            layout: TextView.Layout(
+                maxLength: 16,
+                placeholder: "Please enter your name.",
+                hasBorder: false
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+    }
+#endif
 }

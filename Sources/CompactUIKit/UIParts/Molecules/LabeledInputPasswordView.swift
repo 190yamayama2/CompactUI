@@ -8,15 +8,24 @@
 
 import SwiftUI
 
-struct LabeledInputPasswordView: View {
+public struct LabeledInputPasswordView: View {
 
     // MARK: - Layout Property
 
     let layout: Layout
+    var onSubmitText: ((String) -> Void)
+
+    init(
+        layout: Layout,
+        onSubmitText: @escaping (String) -> Void
+    ) {
+        self.layout = layout
+        self.onSubmitText = onSubmitText
+    }
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         switch layout.alignment {
             case .horizontal:
                 HStack {
@@ -29,7 +38,10 @@ struct LabeledInputPasswordView: View {
                         secureText: layout.passwordText,
                         layout: PasswordTextView.Layout(
                             layout: layout.passwordLayout
-                        )
+                        ), 
+                        onSubmitText: { value in
+                            onSubmitText(value)
+                        }
                     )
                     Spacer().frame(width: layout.rightMargin)
                 }
@@ -49,7 +61,10 @@ struct LabeledInputPasswordView: View {
                         secureText: layout.passwordText,
                         layout: PasswordTextView.Layout(
                             layout: layout.passwordLayout
-                        )
+                        ),
+                        onSubmitText: { value in
+                            onSubmitText(value)
+                        }
                     )
                     Spacer().frame(width: layout.rightMargin)
                 })
@@ -117,6 +132,7 @@ extension LabeledInputPasswordView {
 
 // MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
         LabeledInputPasswordView(
             layout: LabeledInputPasswordView.Layout(
@@ -127,7 +143,10 @@ extension LabeledInputPasswordView {
                 passwordLayout: PasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
         LabeledInputPasswordView(
             layout: LabeledInputPasswordView.Layout(
@@ -138,7 +157,42 @@ extension LabeledInputPasswordView {
                 passwordLayout: PasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
     }
+#else
+    VStack {
+        LabeledInputPasswordView(
+            layout: LabeledInputPasswordView.Layout(
+                labelText: "Please enter password.",
+                passwordText: "",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(textForegroundColor: .gray),
+                passwordLayout: PasswordTextView.Layout(
+                    placeholder: "8 to 16 half-width alphanumeric characters."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        LabeledInputPasswordView(
+            layout: LabeledInputPasswordView.Layout(
+                labelText: "Please enter password.",
+                passwordText: "",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(textForegroundColor: .gray),
+                passwordLayout: PasswordTextView.Layout(
+                    placeholder: "8 to 16 half-width alphanumeric characters."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+    }
+#endif
 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SignView: View {
+public struct SignView: View {
 
     // MARK: - Enum
 
@@ -24,7 +24,7 @@ struct SignView: View {
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         switch mode {
             case .signIn:
                 singIn
@@ -36,17 +36,25 @@ struct SignView: View {
     private var singIn: some View {
         VStack(alignment: .center, spacing: 8, content: {
             Spacer()
+            Spacer(minLength: layout.signUpLayout.spacerSize)
+            Spacer()
             Text(layout.signInLayout.titleText)
                 .font(layout.signInLayout.titleFont)
-            Spacer().frame(height: layout.signInLayout.titleSubTitleSpacerSize)
+            Spacer()
             Text(layout.signInLayout.subTitleText)
                 .font(layout.signInLayout.subTitleFont)
             Spacer(minLength: layout.signInLayout.spacerSize)
             LabeledInputTextView(
-                layout: layout.signInLayout.accountIdFieldLayout
+                layout: layout.signInLayout.accountIdFieldLayout,
+                onSubmitText: { value in
+                    print(value)
+                }
             )
             LabeledInputPasswordView(
-                layout: layout.signInLayout.passwordFieldLayout
+                layout: layout.signInLayout.passwordFieldLayout,
+                onSubmitText: { value in
+                    print(value)
+                }
             )
             Spacer().frame(height: layout.signInLayout.spacerSize)
             GeneralButton(
@@ -68,17 +76,29 @@ struct SignView: View {
     private var singUp: some View {
         VStack(alignment: .center, spacing: 8, content: {
             Spacer()
+            Spacer(minLength: layout.signUpLayout.spacerSize)
+            Spacer()
             Text(layout.signUpLayout.titleText)
                 .font(layout.signUpLayout.titleFont)
             Spacer(minLength: layout.signUpLayout.spacerSize)
+            Spacer()
             LabeledInputTextView(
-                layout: layout.signUpLayout.accountIdFieldLayout
+                layout: layout.signUpLayout.accountIdFieldLayout,
+                onSubmitText: { value in
+                    print(value)
+                }
             )
             LabeledInputPasswordView(
-                layout: layout.signUpLayout.firstPasswordFieldLayout
+                layout: layout.signUpLayout.firstPasswordFieldLayout,
+                onSubmitText: { value in
+                    print(value)
+                }
             )
             LabeledInputPasswordView(
-                layout: layout.signUpLayout.secondPasswordFieldLayout
+                layout: layout.signUpLayout.secondPasswordFieldLayout,
+                onSubmitText: { value in
+                    print(value)
+                }
             )
             LabeledSegmentPickerView(
                 selectedKey: "",
@@ -95,7 +115,10 @@ struct SignView: View {
                     segmentSelectedTextColor: .black,
                     segmentBackgroundColor: .white,
                     backgroundColor: .clear
-                )
+                ),
+                onSelected: { value in
+                    print(value)
+                }
             )
             Spacer().frame(height: layout.signUpLayout.spacerSize)
             GeneralButton(
@@ -104,13 +127,16 @@ struct SignView: View {
 
                 }
             )
+            Spacer().frame(height: layout.signUpLayout.spacerSize)
             GeneralButton(
                 layout: layout.signUpLayout.signInButtonLayout,
                 tapAction: {
                     mode = .signIn
                 }
             )
+            Spacer().frame(height: layout.signUpLayout.spacerSize)
             Spacer()
+            Spacer().frame(height: layout.signUpLayout.spacerSize)
         })
     }
 }
@@ -226,8 +252,8 @@ extension SignView {
     }
 
 }
-
 #Preview {
+#if os(iOS)
     SignView(
         mode: SignView.Mode.signUp,
         layout: SignView.Layout(
@@ -237,24 +263,23 @@ extension SignView {
                     labelText: "Please enter account id.",
                     inputText: "",
                     textLayout: TextView.Layout(
-                        placeholder: "Please enter your name.",
-                        keyboardType: .asciiCapableNumberPad,
-                        maxLength: 16
+                        maxLength: 16,
+                        placeholder: "Please enter your name."
                     )
                 ),
                 passwordFieldLayout: LabeledInputPasswordView.Layout(
                     labelText: "Please enter password.",
                     passwordText: "",
                     passwordLayout: PasswordTextView.Layout(
-                        placeholder: "8 to 16 half-width alphanumeric characters.",
-                        maxLength: 16
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
                     )
                 ),
                 signInButtonLayout: GeneralButton.Layout(
                     text: "Sign in",
                     height: 40,
                     textForegroundColor: .white,
-                    backgroundColor: .cyan,
+                    backgroundColor: .gray,
                     hasBorder: true,
                     cornerRadius: 16
                 ),
@@ -274,32 +299,31 @@ extension SignView {
                     labelText: "Please enter account id.",
                     inputText: "",
                     textLayout: TextView.Layout(
-                        placeholder: "Please enter your name.",
-                        keyboardType: .asciiCapableNumberPad,
-                        maxLength: 16
+                        maxLength: 16,
+                        placeholder: "Please enter your name."
                     )
                 ),
                 firstPasswordFieldLayout: LabeledInputPasswordView.Layout(
                     labelText: "Please enter password.",
                     passwordText: "",
                     passwordLayout: PasswordTextView.Layout(
-                        placeholder: "8 to 16 half-width alphanumeric characters.",
-                        maxLength: 16
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
                     )
                 ),
                 secondPasswordFieldLayout: LabeledInputPasswordView.Layout(
                     labelText: "Please enter your password again.",
                     passwordText: "",
                     passwordLayout: PasswordTextView.Layout(
-                        placeholder: "8 to 16 half-width alphanumeric characters.",
-                        maxLength: 16
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
                     )
                 ),
                 signUpButtonLayout: GeneralButton.Layout(
                     text: "Sign up",
                     height: 40,
                     textForegroundColor: .white,
-                    backgroundColor: .cyan,
+                    backgroundColor: .gray,
                     hasBorder: true,
                     cornerRadius: 16
                 ),
@@ -315,4 +339,91 @@ extension SignView {
             )
         )
     )
+#else
+    SignView(
+        mode: SignView.Mode.signUp,
+        layout: SignView.Layout(
+            signInLayout: SignView.SignInLayout(
+                titleText: "Sign in",
+                accountIdFieldLayout: LabeledInputTextView.Layout(
+                    labelText: "Please enter account id.",
+                    inputText: "",
+                    textLayout: TextView.Layout(
+                        maxLength: 16,
+                        placeholder: "Please enter your name."
+                    )
+                ),
+                passwordFieldLayout: LabeledInputPasswordView.Layout(
+                    labelText: "Please enter password.",
+                    passwordText: "",
+                    passwordLayout: PasswordTextView.Layout(
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
+                    )
+                ),
+                signInButtonLayout: GeneralButton.Layout(
+                    text: "Sign in",
+                    height: 40,
+                    textForegroundColor: .white,
+                    backgroundColor: .gray,
+                    hasBorder: true,
+                    cornerRadius: 16
+                ),
+                signUpButtonLayout: GeneralButton.Layout(
+                    text: "If you already have an account, sign in",
+                    height: 40,
+                    textForegroundColor: .gray,
+                    hasTextUnderLine: true,
+                    backgroundColor: .clear,
+                    hasBorder: false,
+                    cornerRadius: 16
+                )
+            ),
+            signUpLayout: SignView.SignUpLayout(
+                titleText: "Sign up",
+                accountIdFieldLayout: LabeledInputTextView.Layout(
+                    labelText: "Please enter account id.",
+                    inputText: "",
+                    textLayout: TextView.Layout(
+                        maxLength: 16,
+                        placeholder: "Please enter your name."
+                    )
+                ),
+                firstPasswordFieldLayout: LabeledInputPasswordView.Layout(
+                    labelText: "Please enter password.",
+                    passwordText: "",
+                    passwordLayout: PasswordTextView.Layout(
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
+                    )
+                ),
+                secondPasswordFieldLayout: LabeledInputPasswordView.Layout(
+                    labelText: "Please enter your password again.",
+                    passwordText: "",
+                    passwordLayout: PasswordTextView.Layout(
+                        maxLength: 16,
+                        placeholder: "8 to 16 half-width alphanumeric characters."
+                    )
+                ),
+                signUpButtonLayout: GeneralButton.Layout(
+                    text: "Sign up",
+                    height: 40,
+                    textForegroundColor: .white,
+                    backgroundColor: .accentColor,
+                    hasBorder: true,
+                    cornerRadius: 16
+                ),
+                signInButtonLayout: GeneralButton.Layout(
+                    text: "Sign in because you don't have an account",
+                    height: 40,
+                    textForegroundColor: .gray,
+                    hasTextUnderLine: true,
+                    backgroundColor: .clear,
+                    hasBorder: false,
+                    cornerRadius: 16
+                )
+            )
+        )
+    )
+#endif
 }

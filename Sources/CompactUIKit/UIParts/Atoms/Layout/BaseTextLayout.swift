@@ -16,7 +16,6 @@ class BaseTextLayout: BaseLayout {
     let placeholder: String
     let placeholderFont: Font
     let placeholderForegroundColor: Color
-    let keyboardType: UIKeyboardType
 
     // MARK: - Initializer
 
@@ -26,7 +25,6 @@ class BaseTextLayout: BaseLayout {
         placeholder: String = "",
         placeholderFont: Font = LayoutDefault.secondaryFont,
         placeholderForegroundColor: Color = LayoutDefault.secondaryFontColor,
-        keyboardType: UIKeyboardType = .default,
         topMargin: CGFloat = LayoutDefault.topMargin,
         leftMargin: CGFloat = LayoutDefault.leftMargin,
         rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -42,7 +40,6 @@ class BaseTextLayout: BaseLayout {
         self.placeholder = placeholder
         self.placeholderFont = placeholderFont
         self.placeholderForegroundColor = placeholderForegroundColor
-        self.keyboardType = keyboardType
         super.init(
             topMargin: topMargin,
             leftMargin: leftMargin,
@@ -64,7 +61,6 @@ class BaseTextLayout: BaseLayout {
         self.placeholderForegroundColor = layout.placeholderForegroundColor
         self.textFont = layout.textFont
         self.textForegroundColor = layout.textForegroundColor
-        self.keyboardType = layout.keyboardType
         super.init(
             topMargin: layout.topMargin,
             leftMargin: layout.leftMargin,

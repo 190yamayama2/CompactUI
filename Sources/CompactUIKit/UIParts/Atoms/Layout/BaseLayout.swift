@@ -15,10 +15,10 @@ class BaseLayout{
     var rightMargin: CGFloat
     var bottomMargin: CGFloat
     var backgroundColor: Color
-    var backgroundUIColor: UIColor? {
-        guard let cgColor = backgroundColor.cgColor 
+    var backgroundUIColor: XColor? {
+        guard let cgColor = backgroundColor.cgColor
         else { return nil }
-        return UIColor.init(cgColor: cgColor)
+        return XColor.init(cgColor: cgColor)
     }
     var hasBorder: Bool
     var borderColor: Color
