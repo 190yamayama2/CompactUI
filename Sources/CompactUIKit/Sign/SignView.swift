@@ -160,7 +160,7 @@ extension SignView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             signInLayout: SignInLayout,
             signUpLayout: SignUpLayout
         ) {
@@ -187,7 +187,7 @@ extension SignView {
 
         // MARK: - Initializer
 
-        init(
+        public init(
             titleText: String,
             titleFont: Font = .title,
             subTitleText: String = "",
@@ -209,6 +209,21 @@ extension SignView {
             self.passwordFieldLayout = passwordFieldLayout
             self.signInButtonLayout = signInButtonLayout
             self.signUpButtonLayout = signUpButtonLayout
+        }
+
+        public init(
+            layout: SignInLayout
+        ) {
+            self.titleText = layout.titleText
+            self.titleFont = layout.titleFont
+            self.subTitleText = layout.subTitleText
+            self.subTitleFont = layout.subTitleFont
+            self.titleSubTitleSpacerSize = layout.titleSubTitleSpacerSize
+            self.spacerSize = layout.spacerSize
+            self.accountIdFieldLayout = layout.accountIdFieldLayout
+            self.passwordFieldLayout = layout.passwordFieldLayout
+            self.signInButtonLayout = layout.signInButtonLayout
+            self.signUpButtonLayout = layout.signUpButtonLayout
         }
 
     }
@@ -256,9 +271,26 @@ extension SignView {
             self.signUpButtonLayout = signUpButtonLayout
             self.signInButtonLayout = signInButtonLayout
         }
+
+        public init(
+            layout: SignUpLayout
+        ) {
+            self.titleText = layout.titleText
+            self.titleFont = layout.titleFont
+            self.subTitleText = layout.subTitleText
+            self.subTitleFont = layout.subTitleFont
+            self.titleSubTitleSpacerSize = layout.titleSubTitleSpacerSize
+            self.spacerSize = layout.spacerSize
+            self.accountIdFieldLayout = layout.accountIdFieldLayout
+            self.firstPasswordFieldLayout = layout.firstPasswordFieldLayout
+            self.secondPasswordFieldLayout = layout.secondPasswordFieldLayout
+            self.signUpButtonLayout = layout.signUpButtonLayout
+            self.signInButtonLayout = layout.signInButtonLayout
+        }
     }
 
 }
+
 #Preview {
 #if os(iOS)
     SignView(
