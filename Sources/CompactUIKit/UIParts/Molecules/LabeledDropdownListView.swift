@@ -1,5 +1,5 @@
 //
-//  LabeledWheelPickerView.swift
+//  LabeledDropdownListView.swift
 //  CompactUISample
 //  
 //  Created by 190yamayama on 2024/04/22
@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-struct LabeledWheelPickerView: View {
+/// Currently it is not possible to change the font or color of the dropdown list.
+public struct LabeledDropdownListView: View {
 
     // MARK: - Enum
 
@@ -17,17 +18,11 @@ struct LabeledWheelPickerView: View {
         case vertical
     }
 
-    enum PickerViewStyle {
-        case wheel
-        case inline
-    }
-
     // MARK: - Properties
 
     @State var selectedKey: String
     let labelText: String
     let items: [(key: String, value: String)]
-    let pickerViewStyle: PickerViewStyle
     let layout: Layout
 
     // MARK: - Initializer
@@ -36,19 +31,17 @@ struct LabeledWheelPickerView: View {
         selectedKey: String,
         labelText: String,
         items: [(key: String, value: String)],
-        pickerViewStyle: PickerViewStyle,
         layout: Layout = Layout()
     ) {
         self.selectedKey = selectedKey
         self.labelText = labelText
         self.items = items
-        self.pickerViewStyle = pickerViewStyle
         self.layout = layout
     }
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer().frame(height: layout.topMargin)
             switch layout.alignment {
@@ -58,33 +51,53 @@ struct LabeledWheelPickerView: View {
                         Text(verbatim: labelText)
                             .font(layout.titleTextFont)
                             .foregroundStyle(layout.titleTextColor)
-                        Spacer().frame(width: layout.leftMargin)
-                        switch pickerViewStyle {
-                            case .wheel:
-                                wheelPicker
-                            case .inline:
-                                inlinePicker
-                        }
+                        picker
                         Spacer()
                         Spacer().frame(width: layout.rightMargin)
                     }
                 case .vertical:
-                    HStack {
-                        Spacer().frame(width: layout.leftMargin)
-                        Text(verbatim: labelText)
-                            .font(layout.titleTextFont)
-                            .foregroundStyle(layout.titleTextColor)
-                        Spacer()
-                        Spacer().frame(width: layout.rightMargin)
+                    switch layout.titleAlignment {
+                        case .leading:
+                            HStack {
+                                Spacer().frame(width: layout.leftMargin)
+                                Text(verbatim: labelText)
+                                    .font(layout.titleTextFont)
+                                    .foregroundStyle(layout.titleTextColor)
+                                Spacer()
+                                Spacer().frame(width: layout.rightMargin)
+                            }
+                        case .center:
+                            HStack {
+                                Spacer().frame(width: layout.leftMargin)
+                                Spacer()
+                                Text(verbatim: labelText)
+                                    .font(layout.titleTextFont)
+                                    .foregroundStyle(layout.titleTextColor)
+                                Spacer()
+                                Spacer().frame(width: layout.rightMargin)
+                            }
+                        case .trailing:
+                            HStack {
+                                Spacer().frame(width: layout.leftMargin)
+                                Spacer()
+                                Text(verbatim: labelText)
+                                    .font(layout.titleTextFont)
+                                    .foregroundStyle(layout.titleTextColor)
+                                Spacer().frame(width: layout.rightMargin)
+                            }
+                        default:
+                            HStack {
+                                Spacer().frame(width: layout.leftMargin)
+                                Text(verbatim: labelText)
+                                    .font(layout.titleTextFont)
+                                    .foregroundStyle(layout.titleTextColor)
+                                Spacer()
+                                Spacer().frame(width: layout.rightMargin)
+                            }
                     }
                     HStack {
                         Spacer().frame(width: layout.leftMargin)
-                        switch pickerViewStyle {
-                            case .wheel:
-                                wheelPicker
-                            case .inline:
-                                inlinePicker
-                        }
+                        picker
                         Spacer().frame(width: layout.rightMargin)
                     }
             }
@@ -92,36 +105,38 @@ struct LabeledWheelPickerView: View {
         }
     }
 
-    private var wheelPicker: some View {
-        picker.pickerStyle(.wheel)
-    }
-
-    private var inlinePicker: some View {
-        picker.pickerStyle(.inline)
-    }
-
     private var picker: some View {
-        Picker(
-            selection: $selectedKey,
-            label: Text(labelText),
-            content: {
+#if os(iOS)
+        Menu {
+            Picker("", selection: $selectedKey, content: {
                 ForEach(items, id: \.key) { key, value in
                     Text(value)
                         .font(layout.selectionTextFont)
                         .foregroundColor(layout.selectionTextColor)
                         .tag(key)
                 }
-            }
-        )
-        .onChange(of: selectedKey) {
-            print("selectedKey=\(selectedKey)")
+            })
+        } label: {
+            Text(items.first(where: { $0.key == selectedKey})?.value ?? "")
+                .font(layout.selectionTextFont)
+                .foregroundColor(layout.selectionTextColor)
         }
+#else
+        Picker("", selection: $selectedKey, content: {
+            ForEach(items, id: \.key) { key, value in
+                Text(value)
+                    .font(layout.selectionTextFont)
+                    .foregroundColor(layout.selectionTextColor)
+                    .tag(key)
+            }
+        })
+#endif
     }
 
 }
 
 // MARK: - Layout
-extension LabeledWheelPickerView {
+extension LabeledDropdownListView {
     final class Layout: BaseLayout {
 
         // MARK: - Properties
@@ -175,11 +190,14 @@ extension LabeledWheelPickerView {
         }
 
     }
+
 }
 
+// MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
-        LabeledWheelPickerView(
+        LabeledDropdownListView(
             selectedKey: "default",
             labelText: "Language",
             items: [
@@ -187,12 +205,12 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .wheel,
-            layout: LabeledWheelPickerView.Layout(
-                alignment: .horizontal
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleAlignment: .leading
             )
         )
-        LabeledWheelPickerView(
+        LabeledDropdownListView(
             selectedKey: "en",
             labelText: "Language",
             items: [
@@ -200,12 +218,12 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .wheel,
-            layout: LabeledWheelPickerView.Layout(
-                alignment: .horizontal
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleAlignment: .center
             )
         )
-        LabeledWheelPickerView(
+        LabeledDropdownListView(
             selectedKey: "jp",
             labelText: "Language",
             items: [
@@ -213,12 +231,12 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .inline,
-            layout: LabeledWheelPickerView.Layout(
-                alignment: .horizontal
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleAlignment: .trailing
             )
         )
-        LabeledWheelPickerView(
+        LabeledDropdownListView(
             selectedKey: "default",
             labelText: "Language",
             items: [
@@ -226,12 +244,26 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .wheel,
-            layout: LabeledWheelPickerView.Layout(
-                alignment: .vertical
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal
             )
         )
-        LabeledWheelPickerView(
+    }
+#else
+    VStack {
+        LabeledDropdownListView(
+            selectedKey: "default",
+            labelText: "Language",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal
+            )
+        )
+        LabeledDropdownListView(
             selectedKey: "en",
             labelText: "Language",
             items: [
@@ -239,12 +271,11 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .wheel,
-            layout: LabeledWheelPickerView.Layout(
-                alignment: .vertical
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal
             )
         )
-        LabeledWheelPickerView(
+        LabeledDropdownListView(
             selectedKey: "jp",
             labelText: "Language",
             items: [
@@ -252,10 +283,46 @@ extension LabeledWheelPickerView {
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
-            pickerViewStyle: .inline,
-            layout: LabeledWheelPickerView.Layout(
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal
+            )
+        )
+        LabeledDropdownListView(
+            selectedKey: "default",
+            labelText: "Language",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical
+            )
+        )
+        LabeledDropdownListView(
+            selectedKey: "en",
+            labelText: "Language",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical
+            )
+        )
+        LabeledDropdownListView(
+            selectedKey: "jp",
+            labelText: "Language",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
                 alignment: .vertical
             )
         )
     }
+#endif
 }

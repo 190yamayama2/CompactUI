@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-struct PasswordTextView: View {
+public struct PasswordTextView: View {
 
     // MARK: - State
 
@@ -17,6 +17,7 @@ struct PasswordTextView: View {
     @State private var isShowSecure = false
     private var showSecureImage: Image
     private var hideSecureImage: Image
+    var onSubmitText: ((String) -> Void)
 
     // MARK: - Layout Property
 
@@ -28,18 +29,20 @@ struct PasswordTextView: View {
         secureText: String,
         layout: Layout = Layout(),
         showSecureImage: Image = Image(systemName: "eye"),
-        hideSecureImage: Image = Image(systemName: "eye.slash")
+        hideSecureImage: Image = Image(systemName: "eye.slash"),
+        onSubmitText: @escaping ((String) -> Void)
     ) {
         self.secureText = secureText
         self.displayText = secureText
         self.layout = layout
         self.showSecureImage = showSecureImage
         self.hideSecureImage = hideSecureImage
+        self.onSubmitText = onSubmitText
     }
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         if layout.hasBorder {
             secureTextField
                 .overlay(
@@ -68,14 +71,15 @@ struct PasswordTextView: View {
                         && layout.maxLength > 0
                         && formatText.count > layout.maxLength
                     {
-                        secureText = String(formatText.prefix(layout.maxLength))
+                        let newText = String(formatText.prefix(layout.maxLength))
+                        secureText = newText
+                        displayText = newText
                     } else {
                         secureText = formatText
+                        displayText = newValue
                     }
+                    onSubmitText(secureText)
                 })
-                .onChange(of: secureText) { oldValue, newValue in
-                    displayText = newValue
-                }
                 if isShowSecure {
                     Text(secureText)
                         .foregroundColor(layout.displayTextForegroundColor)
@@ -122,15 +126,14 @@ extension PasswordTextView {
         // MARK: - Initializer
 
         init(
+            maxLength: Int = -1,
+            hasInputTextDisplayButton: Bool = false,
+            displayTextForegroundColor: Color = .gray,
             placeholder: String = "",
             placeholderFont: Font = LayoutDefault.secondaryFont,
             placeholderForegroundColor: Color = LayoutDefault.secondaryFontColor,
             textFont: Font = LayoutDefault.primaryFont,
             textForegroundColor: Color = LayoutDefault.primaryFontColor,
-            keyboardType: UIKeyboardType = .default,
-            maxLength: Int = -1,
-            hasInputTextDisplayButton: Bool = false,
-            displayTextForegroundColor: Color = .gray,
             topMargin: CGFloat = LayoutDefault.topMargin,
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -150,7 +153,6 @@ extension PasswordTextView {
                 placeholder: placeholder,
                 placeholderFont: placeholderFont,
                 placeholderForegroundColor: placeholderForegroundColor,
-                keyboardType: keyboardType,
                 topMargin: topMargin,
                 leftMargin: leftMargin,
                 rightMargin: rightMargin,
@@ -175,7 +177,6 @@ extension PasswordTextView {
                 placeholder: layout.placeholder,
                 placeholderFont: layout.placeholderFont,
                 placeholderForegroundColor: layout.placeholderForegroundColor,
-                keyboardType: layout.keyboardType,
                 topMargin: layout.topMargin,
                 leftMargin: layout.leftMargin,
                 rightMargin: layout.rightMargin,
@@ -194,46 +195,107 @@ extension PasswordTextView {
 
 // MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
         PasswordTextView(
             secureText: "",
             layout: PasswordTextView.Layout(
-                placeholder: "8 to 16 half-width alphanumeric characters.",
-                keyboardType: .asciiCapableNumberPad,
-                hasInputTextDisplayButton: true
-            )
+                hasInputTextDisplayButton: true,
+                placeholder: "8 to 16 half-width alphanumeric characters."
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
         .environment(\.colorScheme, .dark)
         PasswordTextView(
             secureText: "",
             layout: PasswordTextView.Layout(
-                placeholder: "8 to 16 half-width alphanumeric characters.",
-                keyboardType: .asciiCapableNumberPad,
-                hasInputTextDisplayButton: false
-            )
-        )
-        .environment(\.colorScheme, .dark)
-        PasswordTextView(
-            secureText: "",
-            layout: PasswordTextView.Layout(
-                placeholder: "8 to 16 half-width alphanumeric characters.",
-                keyboardType: .asciiCapableNumberPad,
-                hasInputTextDisplayButton: false, 
-                backgroundColor: .gray,
-                hasBorder: false
-            )
-        )
-        .environment(\.colorScheme, .dark)
-        PasswordTextView(
-            secureText: "",
-            layout: PasswordTextView.Layout(
-                placeholder: "8 to 16 half-width alphanumeric characters.",
-                keyboardType: .asciiCapableNumberPad,
                 hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters."
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters.",
                 backgroundColor: .gray,
                 hasBorder: false
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters.",
+                backgroundColor: .gray,
+                hasBorder: false
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
         .environment(\.colorScheme, .dark)
     }
+#else
+    VStack {
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: true,
+                placeholder: "8 to 16 half-width alphanumeric characters."
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters."
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters.",
+                backgroundColor: .gray,
+                hasBorder: false
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+        PasswordTextView(
+            secureText: "",
+            layout: PasswordTextView.Layout(
+                hasInputTextDisplayButton: false,
+                placeholder: "8 to 16 half-width alphanumeric characters.",
+                backgroundColor: .gray,
+                hasBorder: false
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        .environment(\.colorScheme, .dark)
+    }
+#endif
 }

@@ -8,9 +8,19 @@
 
 import SwiftUI
 
-struct LabeledInputTextView: View {
+public struct LabeledInputTextView: View {
     let layout: Layout
-    var body: some View {
+    var onSubmitText: ((String) -> Void)
+
+    init(
+        layout: Layout,
+        onSubmitText: @escaping ((String) -> Void)
+    ) {
+        self.layout = layout
+        self.onSubmitText = onSubmitText
+    }
+
+    public var body: some View {
         switch layout.alignment {
             case .horizontal:
                 HStack {
@@ -23,7 +33,10 @@ struct LabeledInputTextView: View {
                         text: layout.inputText,
                         layout: TextView.Layout(
                             layout: layout.textLayout
-                        )
+                        ),
+                        onSubmitText: { value  in
+                            onSubmitText(value)
+                        }
                     )
                     Spacer().frame(width: layout.rightMargin)
                 }
@@ -43,7 +56,10 @@ struct LabeledInputTextView: View {
                         text: layout.inputText,
                         layout: TextView.Layout(
                             layout: layout.textLayout
-                        )
+                        ),
+                        onSubmitText: { value  in
+                            onSubmitText(value)
+                        }
                     )
                     Spacer().frame(width: layout.rightMargin)
                 })
@@ -108,6 +124,7 @@ extension LabeledInputTextView {
 
 // MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
         LabeledInputTextView(
             layout: LabeledInputTextView.Layout(
@@ -120,7 +137,10 @@ extension LabeledInputTextView {
                 textLayout: TextView.Layout(
                     placeholder: "Please enter your name."
                 )
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
         LabeledInputTextView(
             layout: LabeledInputTextView.Layout(
@@ -133,7 +153,46 @@ extension LabeledInputTextView {
                 textLayout: TextView.Layout(
                     placeholder: "Please enter your name."
                 )
-            )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
         )
     }
+#else
+    VStack {
+        LabeledInputTextView(
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                inputText: "",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: TextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        LabeledInputTextView(
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                inputText: "",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: TextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+    }
+#endif
 }

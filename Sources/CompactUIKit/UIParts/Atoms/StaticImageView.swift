@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct StaticImageView: View {
+public struct StaticImageView: View {
 
     // MARK: - Properties
 
@@ -27,7 +27,7 @@ struct StaticImageView: View {
 
     // MARK: - View
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .center, content: {
             Spacer().frame(width: layout.topMargin)
             HStack(alignment: .center, content: {
@@ -62,7 +62,9 @@ extension StaticImageView {
     }
 }
 
+// MARK: - Preview
 #Preview {
+#if os(iOS)
     VStack {
         StaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
@@ -75,9 +77,28 @@ extension StaticImageView {
         StaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
             layout: StaticImageView.Layout(
-                backgroundColor: .cyan,
+                backgroundColor: .green,
                 hasBorder: false
             )
         )
     }
+#else
+    VStack {
+        StaticImageView(
+            image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
+            layout: StaticImageView.Layout(
+                backgroundColor: .yellow,
+                borderColor: .red,
+                borderWidth: 3
+            )
+        )
+        StaticImageView(
+            image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
+            layout: StaticImageView.Layout(
+                backgroundColor: .green,
+                hasBorder: false
+            )
+        )
+    }
+#endif
 }
