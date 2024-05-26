@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "This view is a sample. Will be removed in the future.")
 public struct SignView: View {
 
     // MARK: - Enum
