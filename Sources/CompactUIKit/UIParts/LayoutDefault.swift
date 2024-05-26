@@ -34,6 +34,18 @@ public struct LayoutDefault {
     /// Default bottomMargin
     public static var bottomMargin: CGFloat = 16.0
 
+    /// Default leadingPadding
+    public static var leadingPadding: CGFloat = 4.0
+
+    /// Default trailingPadding
+    public static var trailingPadding: CGFloat = 4.0
+
+    /// Default topPadding
+    public static var topPadding: CGFloat = 4.0
+
+    /// Default bottomPadding
+    public static var bottomPadding: CGFloat = 4.0
+
     /// Default backgroundColor
     public static var backgroundColor: Color = .clear
 
@@ -69,6 +81,9 @@ public struct LayoutDefault {
 
     /// Default secondaryFontUIColor
     public static var secondaryFontUIColor: XColor = .gray
+    
+    /// Default sliderColor
+    public static var sliderColor: Color = .blue
 
 }
 
