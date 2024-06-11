@@ -65,6 +65,7 @@ struct TabBarView<Content: View>: View {
                         }
                     }
                     .frame(width: itemWidth, height: layout.tabHeight)
+#if os(iOS)
                     .overlay(alignment: .bottomLeading) {
                         if tab.id == selection {
                             Rectangle()
@@ -79,6 +80,7 @@ struct TabBarView<Content: View>: View {
                                 )
                         }
                     }
+#endif
                 }
             }
             .offset(x: offsetX(displayTabCount: layout.displayTabCount, itemWidth: itemWidth))
@@ -158,7 +160,11 @@ struct GeneralTabView<Content: View>: View {
                             .tag(tabContent.id)
                     }
                 }
+#if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
+#else
+
+#endif
             }
         }
     }
