@@ -30,22 +30,9 @@ public static var borderColor: Color = Color.gray
 public static var borderWidth: CGFloat = 1.0
 /// Default cornerRadius
 public static var cornerRadius: CGFloat = 16
-/// Default primaryFont
-public static var primaryFont: Font = .system(size: 12.0)
-/// Default primaryFontColor
-public static var primaryFontColor: Color = isDarkMode ? .white : .black
-/// Default fontSecondary
-public static var secondaryFont: Font = .system(size: 10.0)
-/// Default secondaryFontColor
-public static var secondaryFontColor: Color = .gray
-/// Default primaryUIFont
-public static var primaryUIFont: UIFont = .systemFont(ofSize: 12.0)
-/// Default primaryFontUIColor
-public static var primaryFontUIColor: UIColor = .black
-/// Default secondaryUIFont
-public static var secondaryUIFont: UIFont = .systemFont(ofSize: 10.0)
-/// Default secondaryFontUIColor
-public static var secondaryFontUIColor: UIColor = .gray
+
+・・・　more defined ・・・
+
 ```
 
 # Atoms
@@ -136,6 +123,67 @@ PasswordTextView(
     }
 )
 .environment(\.colorScheme, .dark)
+```
+
+## SliderView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="294" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/5f621ff6-1f14-484d-9cea-a172e1b03b8a"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/ee81eac8-a721-493a-a8fe-b1ae22891226"> |
+
+```swift
+#if os(iOS)
+    VStack {
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                hasBorder: false
+            )
+        )
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .purple,
+                hasBorder: true,
+                borderColor: .blue,
+                borderWidth: 3.0,
+                cornerRadius: 0
+            )
+        )
+    }
+#else
+    VStack {
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .gray,
+                hasBorder: false
+            )
+        )
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .gray,
+                hasBorder: true,
+                borderColor: .blue,
+                borderWidth: 3.0,
+                cornerRadius: 0
+            )
+        )
+    }
+#endif
 ```
 
 ## GeneralButton sample
