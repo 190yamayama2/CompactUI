@@ -195,6 +195,72 @@ GeneralButton(
 )
 ```
 
+## GeneralTabView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/d0bbe9ec-45e2-4d05-b85d-e6eb31d78840"> | <img width="602" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/39a71252-4ff5-44a7-9821-abc6ec6ec1b5"> |
+
+```swift
+GeneralTabView(
+    tabContents: [
+        TabContent(
+            id: 0,
+            title: "Personal",
+            content: PageView(text: "1st")
+        ),
+        TabContent(
+            id: 1,
+            title: "Trending",
+            content: PageView(text: "2nd")
+        ),
+        TabContent(
+            id: 2,
+            title: "Country News",
+            content: PageView(text: "3rd")
+        ),
+        TabContent(
+            id: 3,
+            title: "World News",
+            content: PageView(text: "4th")
+        )
+    ],
+    selection: 1,
+    layout: .init(displayTabCount: .three)
+)
+GeneralTabView(
+    tabContents: [
+        TabContent(
+            id: 0,
+            title: "Personal",
+            content: PageView(text: "1st")
+        ),
+        TabContent(
+            id: 1,
+            title: "Trending",
+            content: PageView(text: "2nd")
+        ),
+        TabContent(
+            id: 2,
+            title: "Country News",
+            content: PageView(text: "3rd")
+        ),
+        TabContent(
+            id: 3,
+            title: "World News",
+            content: PageView(text: "4th")
+        ),
+        TabContent(
+            id: 4,
+            title: "Universe News",
+            content: PageView(text: "5th")
+        )
+    ],
+    selection: 3,
+    layout: .init(displayTabCount: .four)
+)
+```
+
 ## StaticImageView sample
 
 | iOS | MacOS |
