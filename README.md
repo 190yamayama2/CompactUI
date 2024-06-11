@@ -30,22 +30,9 @@ public static var borderColor: Color = Color.gray
 public static var borderWidth: CGFloat = 1.0
 /// Default cornerRadius
 public static var cornerRadius: CGFloat = 16
-/// Default primaryFont
-public static var primaryFont: Font = .system(size: 12.0)
-/// Default primaryFontColor
-public static var primaryFontColor: Color = isDarkMode ? .white : .black
-/// Default fontSecondary
-public static var secondaryFont: Font = .system(size: 10.0)
-/// Default secondaryFontColor
-public static var secondaryFontColor: Color = .gray
-/// Default primaryUIFont
-public static var primaryUIFont: UIFont = .systemFont(ofSize: 12.0)
-/// Default primaryFontUIColor
-public static var primaryFontUIColor: UIColor = .black
-/// Default secondaryUIFont
-public static var secondaryUIFont: UIFont = .systemFont(ofSize: 10.0)
-/// Default secondaryFontUIColor
-public static var secondaryFontUIColor: UIColor = .gray
+
+・・・　more defined ・・・
+
 ```
 
 # Atoms
@@ -138,6 +125,67 @@ PasswordTextView(
 .environment(\.colorScheme, .dark)
 ```
 
+## SliderView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="294" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/5f621ff6-1f14-484d-9cea-a172e1b03b8a"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/ee81eac8-a721-493a-a8fe-b1ae22891226"> |
+
+```swift
+#if os(iOS)
+    VStack {
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                hasBorder: false
+            )
+        )
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .purple,
+                hasBorder: true,
+                borderColor: .blue,
+                borderWidth: 3.0,
+                cornerRadius: 0
+            )
+        )
+    }
+#else
+    VStack {
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .gray,
+                hasBorder: false
+            )
+        )
+        SliderView(
+            value: 0,
+            minValue: -100,
+            maxValue: 100,
+            layout: SliderView.Layout(
+                sliderColor: .green,
+                backgroundColor: .gray,
+                hasBorder: true,
+                borderColor: .blue,
+                borderWidth: 3.0,
+                cornerRadius: 0
+            )
+        )
+    }
+#endif
+```
+
 ## GeneralButton sample
 
 | iOS | MacOS |
@@ -192,6 +240,72 @@ GeneralButton(
     ), tapAction: {
         print("tapped.")
     }
+)
+```
+
+## GeneralTabView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/d0bbe9ec-45e2-4d05-b85d-e6eb31d78840"> | <img width="602" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/39a71252-4ff5-44a7-9821-abc6ec6ec1b5"> |
+
+```swift
+GeneralTabView(
+    tabContents: [
+        TabContent(
+            id: 0,
+            title: "Personal",
+            content: PageView(text: "1st")
+        ),
+        TabContent(
+            id: 1,
+            title: "Trending",
+            content: PageView(text: "2nd")
+        ),
+        TabContent(
+            id: 2,
+            title: "Country News",
+            content: PageView(text: "3rd")
+        ),
+        TabContent(
+            id: 3,
+            title: "World News",
+            content: PageView(text: "4th")
+        )
+    ],
+    selection: 1,
+    layout: .init(displayTabCount: .three)
+)
+GeneralTabView(
+    tabContents: [
+        TabContent(
+            id: 0,
+            title: "Personal",
+            content: PageView(text: "1st")
+        ),
+        TabContent(
+            id: 1,
+            title: "Trending",
+            content: PageView(text: "2nd")
+        ),
+        TabContent(
+            id: 2,
+            title: "Country News",
+            content: PageView(text: "3rd")
+        ),
+        TabContent(
+            id: 3,
+            title: "World News",
+            content: PageView(text: "4th")
+        ),
+        TabContent(
+            id: 4,
+            title: "Universe News",
+            content: PageView(text: "5th")
+        )
+    ],
+    selection: 3,
+    layout: .init(displayTabCount: .four)
 )
 ```
 

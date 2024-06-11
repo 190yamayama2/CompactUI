@@ -34,6 +34,18 @@ public struct LayoutDefault {
     /// Default bottomMargin
     public static var bottomMargin: CGFloat = 16.0
 
+    /// Default leadingPadding
+    public static var leadingPadding: CGFloat = 4.0
+
+    /// Default trailingPadding
+    public static var trailingPadding: CGFloat = 4.0
+
+    /// Default topPadding
+    public static var topPadding: CGFloat = 4.0
+
+    /// Default bottomPadding
+    public static var bottomPadding: CGFloat = 4.0
+
     /// Default backgroundColor
     public static var backgroundColor: Color = .clear
 
@@ -69,6 +81,30 @@ public struct LayoutDefault {
 
     /// Default secondaryFontUIColor
     public static var secondaryFontUIColor: XColor = .gray
+    
+    /// Default sliderColor
+    public static var sliderColor: Color = .blue
+
+    /// Default tabWidth
+    public static var displayTabCount: DisplayTabCount = .four
+
+    /// Default tabWidth
+    public static var tabWidth: CGFloat = 80.0
+
+    /// Default tabWidth
+    public static var tabHeight: CGFloat = 40.0
+
+    /// Default primaryFont
+    public static var selectedTabFont: Font = .system(size: 14.0).bold()
+
+    /// Default primaryFontColor
+    public static var selectedTabFontColor: Color = isDarkMode ? .white : .gray
+
+    /// Default primaryFont
+    public static var tabFont: Font = .system(size: 12.0)
+
+    /// Default primaryFontColor
+    public static var tabFontColor: Color = isDarkMode ? .white : .gray
 
 }
 
