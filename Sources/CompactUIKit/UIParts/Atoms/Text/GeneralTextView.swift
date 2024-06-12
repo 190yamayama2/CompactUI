@@ -1,5 +1,5 @@
 //
-//  InputTextField.swift
+//  GeneralTextView.swift
 //  CompactUI
 //
 //  Created by 190yamayama on 2024/02/01.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-public struct TextView: View {
+public struct GeneralTextView: View {
 
     // MARK: - State
 
@@ -70,7 +70,7 @@ public struct TextView: View {
 }
 
 // MARK: - Layout
-extension TextView {
+extension GeneralTextView {
 
     /// InputTextField Layout
     final public class Layout: BaseTextLayout {
@@ -171,9 +171,9 @@ private struct ClearButton: ViewModifier {
 #Preview {
 #if os(iOS)
     VStack {
-        TextView(
+        GeneralTextView(
             text: "",
-            layout: TextView.Layout(
+            layout: GeneralTextView.Layout(
                 maxLength: 16,
                 placeholder: "Please enter your name.",
                 hasBorder: true
@@ -182,9 +182,9 @@ private struct ClearButton: ViewModifier {
                 print(value)
             }
         )
-        TextView(
+        GeneralTextView(
             text: "",
-            layout: TextView.Layout(
+            layout: GeneralTextView.Layout(
                 maxLength: 16,
                 placeholder: "Please enter your name.",
                 hasBorder: false
@@ -196,9 +196,9 @@ private struct ClearButton: ViewModifier {
     }
 #else
     VStack {
-        TextView(
+        GeneralTextView(
             text: "",
-            layout: TextView.Layout(
+            layout: GeneralTextView.Layout(
                 maxLength: 16,
                 placeholder: "Please enter your name.",
                 hasBorder: true
@@ -207,9 +207,9 @@ private struct ClearButton: ViewModifier {
                 print(value)
             }
         )
-        TextView(
+        GeneralTextView(
             text: "",
-            layout: TextView.Layout(
+            layout: GeneralTextView.Layout(
                 maxLength: 16,
                 placeholder: "Please enter your name.",
                 hasBorder: false

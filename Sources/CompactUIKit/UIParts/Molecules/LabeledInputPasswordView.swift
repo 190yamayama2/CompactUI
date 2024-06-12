@@ -34,9 +34,9 @@ public struct LabeledInputPasswordView: View {
                         .font(layout.labelLayout.textFont)
                         .foregroundColor(layout.labelLayout.textForegroundColor)
                         .background(layout.labelLayout.backgroundColor)
-                    PasswordTextView(
+                    GeneralPasswordTextView(
                         secureText: layout.passwordText,
-                        layout: PasswordTextView.Layout(
+                        layout: GeneralPasswordTextView.Layout(
                             layout: layout.passwordLayout
                         ), 
                         onSubmitText: { value in
@@ -57,9 +57,9 @@ public struct LabeledInputPasswordView: View {
                 })
                 HStack(alignment: .center, content: {
                     Spacer().frame(width: layout.leftMargin)
-                    PasswordTextView(
+                    GeneralPasswordTextView(
                         secureText: layout.passwordText,
-                        layout: PasswordTextView.Layout(
+                        layout: GeneralPasswordTextView.Layout(
                             layout: layout.passwordLayout
                         ),
                         onSubmitText: { value in
@@ -92,7 +92,7 @@ extension LabeledInputPasswordView {
         let leftMargin: CGFloat
         let rightMargin: CGFloat
         let labelLayout: BaseLabelLayout
-        let passwordLayout: PasswordTextView.Layout
+        let passwordLayout: GeneralPasswordTextView.Layout
 
         // MARK: - Initializer
 
@@ -103,7 +103,7 @@ extension LabeledInputPasswordView {
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
             labelLayout: BaseLabelLayout = BaseLabelLayout(),
-            passwordLayout: PasswordTextView.Layout = PasswordTextView.Layout()
+            passwordLayout: GeneralPasswordTextView.Layout = GeneralPasswordTextView.Layout()
         ) {
             self.labelText = labelText
             self.passwordText = passwordText
@@ -140,7 +140,7 @@ extension LabeledInputPasswordView {
                 passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
-                passwordLayout: PasswordTextView.Layout(
+                passwordLayout: GeneralPasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
             ),
@@ -154,7 +154,7 @@ extension LabeledInputPasswordView {
                 passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
-                passwordLayout: PasswordTextView.Layout(
+                passwordLayout: GeneralPasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
             ),
@@ -171,7 +171,7 @@ extension LabeledInputPasswordView {
                 passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
-                passwordLayout: PasswordTextView.Layout(
+                passwordLayout: GeneralPasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
             ),
@@ -185,7 +185,7 @@ extension LabeledInputPasswordView {
                 passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
-                passwordLayout: PasswordTextView.Layout(
+                passwordLayout: GeneralPasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
                 )
             ),

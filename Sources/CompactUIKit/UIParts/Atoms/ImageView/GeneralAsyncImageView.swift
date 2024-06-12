@@ -1,5 +1,5 @@
 //
-//  AsyncImageView.swift
+//  GeneralAsyncImageView.swift
 //  CompactUI
 //  
 //  Created by 190yamayama on 2024/04/20
@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-public struct AsyncImageView: View {
+public struct GeneralAsyncImageView: View {
 
     // MARK: - Properties
 
@@ -108,39 +108,39 @@ public struct AsyncImageView: View {
 }
 
 // MARK: - Layout
-extension AsyncImageView {
+extension GeneralAsyncImageView {
     final public class Layout: BaseLayout {
     }
 }
 #Preview {
 #if os(iOS)
     VStack {
-        AsyncImageView(
+        GeneralAsyncImageView(
             urlString: "https://aaaaaaaaaaaaa.com",
-            layout: AsyncImageView.Layout(
+            layout: GeneralAsyncImageView.Layout(
                 borderColor: .green,
                 borderWidth: 2
             )
         )
-        AsyncImageView(
+        GeneralAsyncImageView(
             urlString: "https://aaaaaaaaaaaaa.co.jp",
-            layout: AsyncImageView.Layout(
+            layout: GeneralAsyncImageView.Layout(
                 hasBorder: false
             )
         )
     }
 #else
     VStack {
-        AsyncImageView(
+        GeneralAsyncImageView(
             urlString: "https://aaaaaaaaaaaaa.com",
-            layout: AsyncImageView.Layout(
+            layout: GeneralAsyncImageView.Layout(
                 borderColor: .green,
                 borderWidth: 2
             )
         )
-        AsyncImageView(
+        GeneralAsyncImageView(
             urlString: "https://aaaaaaaaaaaaa.co.jp",
-            layout: AsyncImageView.Layout(
+            layout: GeneralAsyncImageView.Layout(
                 hasBorder: false
             )
         )
