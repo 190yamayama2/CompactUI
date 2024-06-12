@@ -1,5 +1,5 @@
 //
-//  SliderData.swift
+//  GeneralSliderView.swift
 //  CompactUI
 //
 //  Created by 190yamayama on 2024/05/13
@@ -9,37 +9,11 @@
 import Combine
 import SwiftUI
 
-final class SliderData: ObservableObject {
-
-    let didChange = CurrentValueSubject<CGFloat ,Never>(0)
-    let minValue: CGFloat
-    let maxValue: CGFloat
-
-    var sliderValue: CGFloat = 0 {
-        willSet {
-            didChange.send(newValue)
-        }
-    }
-
-    // MARK: - Initializer
-
-    public init(
-        value: CGFloat,
-        minValue: CGFloat = 0,
-        maxValue: CGFloat = 100
-    ) {
-        self.minValue = minValue
-        self.maxValue = maxValue
-        self.didChange.send(value)
-    }
-
-}
-
-public struct SliderView: View {
+public struct GeneralSliderView: View {
 
     // MARK: - Property
 
-    @ObservedObject var sliderValue: SliderData
+    @ObservedObject var sliderValue: GeneralSliderData
 
     // MARK: - Layout Property
 
@@ -53,7 +27,7 @@ public struct SliderView: View {
         maxValue: CGFloat = 100,
         layout: Layout = Layout()
     ) {
-        self.sliderValue = SliderData(
+        self.sliderValue = GeneralSliderData(
             value: value,
             minValue: minValue,
             maxValue: maxValue
@@ -109,7 +83,7 @@ public struct SliderView: View {
 }
 
 // MARK: - Layout
-extension SliderView {
+extension GeneralSliderView {
     final public class Layout: BaseLayout {
 
         let sliderColor: Color
@@ -183,20 +157,20 @@ extension SliderView {
 #Preview {
 #if os(iOS)
     VStack {
-        SliderView(
+        GeneralSliderView(
             value: 0,
             minValue: -100,
             maxValue: 100,
-            layout: SliderView.Layout(
+            layout: GeneralSliderView.Layout(
                 sliderColor: .green,
                 hasBorder: false
             )
         )
-        SliderView(
+        GeneralSliderView(
             value: 0,
             minValue: -100,
             maxValue: 100,
-            layout: SliderView.Layout(
+            layout: GeneralSliderView.Layout(
                 sliderColor: .green,
                 backgroundColor: .purple,
                 hasBorder: true,
@@ -208,21 +182,21 @@ extension SliderView {
     }
 #else
     VStack {
-        SliderView(
+        GeneralSliderView(
             value: 0,
             minValue: -100,
             maxValue: 100,
-            layout: SliderView.Layout(
+            layout: GeneralSliderView.Layout(
                 sliderColor: .green,
                 backgroundColor: .gray,
                 hasBorder: false
             )
         )
-        SliderView(
+        GeneralSliderView(
             value: 0,
             minValue: -100,
             maxValue: 100,
-            layout: SliderView.Layout(
+            layout: GeneralSliderView.Layout(
                 sliderColor: .green,
                 backgroundColor: .gray,
                 hasBorder: true,

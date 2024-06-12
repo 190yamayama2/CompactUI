@@ -1,5 +1,5 @@
 //
-//  GeneralButton.swift
+//  GeneralButtonView.swift
 //  CompactUI
 //  
 //  Created by 190yamayama on 2024/03/24
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct GeneralButton: View {
+public struct GeneralButtonView: View {
 
     // MARK: - Layout Property
 
@@ -131,15 +131,15 @@ public struct GeneralButton: View {
 }
 
 // MARK: - Layout
-extension GeneralButton {
+extension GeneralButtonView {
     final public class Layout: BaseButtonLayout { }
 }
 
 // MARK: - Preview
 #Preview {
     VStack {
-        GeneralButton(
-            layout: GeneralButton.Layout(
+        GeneralButtonView(
+            layout: GeneralButtonView.Layout(
                 text: "Sign up",
                 height: 40,
                 textForegroundColor: .white,
@@ -150,8 +150,8 @@ extension GeneralButton {
                 print("tapped.")
             }
         )
-        GeneralButton(
-            layout: GeneralButton.Layout(
+        GeneralButtonView(
+            layout: GeneralButtonView.Layout(
                 text: "Sign up",
                 height: 40,
                 textForegroundColor: .white,
@@ -162,8 +162,8 @@ extension GeneralButton {
                 print("tapped.")
             }
         )
-        GeneralButton(
-            layout: GeneralButton.Layout(
+        GeneralButtonView(
+            layout: GeneralButtonView.Layout(
                 text: "I have an account, so sign in.",
                 height: 40,
                 textForegroundColor: .gray,
@@ -174,8 +174,8 @@ extension GeneralButton {
                 print("tapped.")
             }
         )
-        GeneralButton(
-            layout: GeneralButton.Layout(
+        GeneralButtonView(
+            layout: GeneralButtonView.Layout(
                 text: "I have an account, so sign in.",
                 height: 40,
                 textForegroundColor: .gray,

@@ -29,9 +29,9 @@ public struct LabeledInputTextView: View {
                         .font(layout.labelLayout.textFont)
                         .foregroundColor(layout.labelLayout.textForegroundColor)
                         .background(layout.labelLayout.backgroundColor)
-                    TextView(
+                    GeneralTextView(
                         text: layout.inputText,
-                        layout: TextView.Layout(
+                        layout: GeneralTextView.Layout(
                             layout: layout.textLayout
                         ),
                         onSubmitText: { value  in
@@ -52,9 +52,9 @@ public struct LabeledInputTextView: View {
                 })
                 HStack(alignment: .center, content: {
                     Spacer().frame(width: layout.leftMargin)
-                    TextView(
+                    GeneralTextView(
                         text: layout.inputText,
-                        layout: TextView.Layout(
+                        layout: GeneralTextView.Layout(
                             layout: layout.textLayout
                         ),
                         onSubmitText: { value  in
@@ -85,7 +85,7 @@ extension LabeledInputTextView {
         let leftMargin: CGFloat
         let rightMargin: CGFloat
         let labelLayout: BaseLabelLayout
-        let textLayout: TextView.Layout
+        let textLayout: GeneralTextView.Layout
 
         // MARK: - Initializer
 
@@ -96,7 +96,7 @@ extension LabeledInputTextView {
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
             labelLayout: BaseLabelLayout = BaseLabelLayout(),
-            textLayout: TextView.Layout = TextView.Layout()
+            textLayout: GeneralTextView.Layout = GeneralTextView.Layout()
         ) {
             self.labelText = labelText
             self.inputText = inputText
@@ -134,7 +134,7 @@ extension LabeledInputTextView {
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
                 ),
-                textLayout: TextView.Layout(
+                textLayout: GeneralTextView.Layout(
                     placeholder: "Please enter your name."
                 )
             ),
@@ -150,7 +150,7 @@ extension LabeledInputTextView {
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
                 ),
-                textLayout: TextView.Layout(
+                textLayout: GeneralTextView.Layout(
                     placeholder: "Please enter your name."
                 )
             ),
@@ -169,7 +169,7 @@ extension LabeledInputTextView {
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
                 ),
-                textLayout: TextView.Layout(
+                textLayout: GeneralTextView.Layout(
                     placeholder: "Please enter your name."
                 )
             ),
@@ -185,7 +185,7 @@ extension LabeledInputTextView {
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
                 ),
-                textLayout: TextView.Layout(
+                textLayout: GeneralTextView.Layout(
                     placeholder: "Please enter your name."
                 )
             ),

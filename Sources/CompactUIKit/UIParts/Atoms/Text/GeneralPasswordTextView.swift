@@ -1,5 +1,5 @@
 //
-//  PasswordTextView.swift
+//  GeneralPasswordTextView.swift
 //  CompactUI
 //
 //  Created by 190yamayama on 2024/03/17.
@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-public struct PasswordTextView: View {
+public struct GeneralPasswordTextView: View {
 
     // MARK: - State
 
@@ -114,7 +114,7 @@ public struct PasswordTextView: View {
 }
 
 // MARK: - Layout
-extension PasswordTextView {
+extension GeneralPasswordTextView {
     final public class Layout: BaseTextLayout {
 
         // MARK: - Properties
@@ -197,9 +197,9 @@ extension PasswordTextView {
 #Preview {
 #if os(iOS)
     VStack {
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: true,
                 placeholder: "8 to 16 half-width alphanumeric characters."
             ),
@@ -208,9 +208,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters."
             ),
@@ -219,9 +219,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters.",
                 backgroundColor: .gray,
@@ -232,9 +232,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters.",
                 backgroundColor: .gray,
@@ -248,9 +248,9 @@ extension PasswordTextView {
     }
 #else
     VStack {
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: true,
                 placeholder: "8 to 16 half-width alphanumeric characters."
             ),
@@ -259,9 +259,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters."
             ),
@@ -270,9 +270,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters.",
                 backgroundColor: .gray,
@@ -283,9 +283,9 @@ extension PasswordTextView {
             }
         )
         .environment(\.colorScheme, .dark)
-        PasswordTextView(
+        GeneralPasswordTextView(
             secureText: "",
-            layout: PasswordTextView.Layout(
+            layout: GeneralPasswordTextView.Layout(
                 hasInputTextDisplayButton: false,
                 placeholder: "8 to 16 half-width alphanumeric characters.",
                 backgroundColor: .gray,

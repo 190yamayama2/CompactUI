@@ -1,5 +1,5 @@
 //
-//  StaticImageView.swift
+//  GeneralStaticImageView.swift
 //  CompactUISample
 //  
 //  Created by 190yamayama on 2024/04/21
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct StaticImageView: View {
+public struct GeneralStaticImageView: View {
 
     // MARK: - Properties
 
@@ -57,7 +57,7 @@ public struct StaticImageView: View {
 }
 
 // MARK: - Layout
-extension StaticImageView {
+extension GeneralStaticImageView {
     final public class Layout: BaseLayout {
     }
 }
@@ -66,17 +66,17 @@ extension StaticImageView {
 #Preview {
 #if os(iOS)
     VStack {
-        StaticImageView(
+        GeneralStaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
-            layout: StaticImageView.Layout(
+            layout: GeneralStaticImageView.Layout(
                 backgroundColor: .yellow,
                 borderColor: .red,
                 borderWidth: 3
             )
         )
-        StaticImageView(
+        GeneralStaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
-            layout: StaticImageView.Layout(
+            layout: GeneralStaticImageView.Layout(
                 backgroundColor: .green,
                 hasBorder: false
             )
@@ -84,17 +84,17 @@ extension StaticImageView {
     }
 #else
     VStack {
-        StaticImageView(
+        GeneralStaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
-            layout: StaticImageView.Layout(
+            layout: GeneralStaticImageView.Layout(
                 backgroundColor: .yellow,
                 borderColor: .red,
                 borderWidth: 3
             )
         )
-        StaticImageView(
+        GeneralStaticImageView(
             image: Image(systemName: "autostartstop.trianglebadge.exclamationmark"),
-            layout: StaticImageView.Layout(
+            layout: GeneralStaticImageView.Layout(
                 backgroundColor: .green,
                 hasBorder: false
             )
