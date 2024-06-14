@@ -167,8 +167,8 @@ public struct LabeledInlinePickerView: View {
             }
         )
         .pickerStyle(.inline)
-        .onSubmit(of: .text) {
-            onSelected(selectedKey)
+        .onChange(of: selectedKey) { newValue in
+            onSelected(newValue)
         }
 #else
         Picker(
@@ -191,8 +191,8 @@ public struct LabeledInlinePickerView: View {
             }
         )
         .pickerStyle(.inline)
-        .onSubmit(of: .text) {
-            onSelected(selectedKey)
+        .onChange(of: selectedKey) { newValue in
+            onSelected(newValue)
         }
 #endif
     }
