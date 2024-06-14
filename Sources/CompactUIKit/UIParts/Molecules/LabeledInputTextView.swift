@@ -9,16 +9,26 @@
 import SwiftUI
 
 public struct LabeledInputTextView: View {
+    
+    // MARK: - Properties
+
+    @State var inputText: String
     let layout: Layout
-    var onSubmitText: ((String) -> Void)
+    let onSubmitText: ((String) -> Void)
+
+    // MARK: - Initializer
 
     public init(
+        inputText: String,
         layout: Layout,
         onSubmitText: @escaping ((String) -> Void)
     ) {
+        self.inputText = inputText
         self.layout = layout
         self.onSubmitText = onSubmitText
     }
+
+    // MARK: - View
 
     public var body: some View {
         switch layout.alignment {
@@ -30,7 +40,7 @@ public struct LabeledInputTextView: View {
                         .foregroundColor(layout.labelLayout.textForegroundColor)
                         .background(layout.labelLayout.backgroundColor)
                     GeneralTextView(
-                        text: layout.inputText,
+                        text: inputText,
                         layout: GeneralTextView.Layout(
                             layout: layout.textLayout
                         ),
@@ -53,7 +63,7 @@ public struct LabeledInputTextView: View {
                 HStack(alignment: .center, content: {
                     Spacer().frame(width: layout.leftMargin)
                     GeneralTextView(
-                        text: layout.inputText,
+                        text: inputText,
                         layout: GeneralTextView.Layout(
                             layout: layout.textLayout
                         ),
@@ -80,7 +90,6 @@ extension LabeledInputTextView {
         // MARK: - Property
 
         let labelText: String
-        let inputText: String
         let alignment: LabeleAlignment
         let leftMargin: CGFloat
         let rightMargin: CGFloat
@@ -91,7 +100,6 @@ extension LabeledInputTextView {
 
         public init(
             labelText: String,
-            inputText: String,
             alignment: LabeleAlignment = .vertical,
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -99,7 +107,6 @@ extension LabeledInputTextView {
             textLayout: GeneralTextView.Layout = GeneralTextView.Layout()
         ) {
             self.labelText = labelText
-            self.inputText = inputText
             self.alignment = alignment
             self.leftMargin = leftMargin
             self.rightMargin = rightMargin
@@ -111,7 +118,6 @@ extension LabeledInputTextView {
             layout: Layout
         ) {
             self.labelText = layout.labelText
-            self.inputText = layout.inputText
             self.alignment = layout.alignment
             self.leftMargin = layout.leftMargin
             self.rightMargin = layout.rightMargin
@@ -127,9 +133,9 @@ extension LabeledInputTextView {
 #if os(iOS)
     VStack {
         LabeledInputTextView(
+            inputText: "",
             layout: LabeledInputTextView.Layout(
                 labelText: "Please enter account id.",
-                inputText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
@@ -143,9 +149,9 @@ extension LabeledInputTextView {
             }
         )
         LabeledInputTextView(
+            inputText: "",
             layout: LabeledInputTextView.Layout(
                 labelText: "Please enter account id.",
-                inputText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
@@ -162,9 +168,9 @@ extension LabeledInputTextView {
 #else
     VStack {
         LabeledInputTextView(
+            inputText: "",
             layout: LabeledInputTextView.Layout(
                 labelText: "Please enter account id.",
-                inputText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray
@@ -178,9 +184,9 @@ extension LabeledInputTextView {
             }
         )
         LabeledInputTextView(
+            inputText: "",
             layout: LabeledInputTextView.Layout(
                 labelText: "Please enter account id.",
-                inputText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(
                     textForegroundColor: .gray

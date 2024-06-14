@@ -23,24 +23,21 @@ public struct LabeledSegmentPickerView: View {
     // MARK: - Properties
 
     @State var selectedKey: String
-    let labelText: String
     let items: [(key: String, value: String)]
     let pickerViewStyle: PickerViewStyle
     let layout: Layout
-    var onSelected: ((String) -> Void)
+    let onSelected: ((String) -> Void)
 
     // MARK: - Initializer
 
     public init(
         selectedKey: String,
-        labelText: String,
         items: [(key: String, value: String)],
         pickerViewStyle: PickerViewStyle = .segmented,
         layout: Layout = Layout(),
         onSelected: @escaping ((String) -> Void)
     ) {
         self.selectedKey = selectedKey
-        self.labelText = labelText
         self.items = items
         self.pickerViewStyle = pickerViewStyle
         self.layout = layout
@@ -80,11 +77,11 @@ public struct LabeledSegmentPickerView: View {
                     HStack {
                         Spacer().frame(width: layout.leftMargin)
                         if #available(iOS 15.0, *) {
-                            Text(verbatim: labelText)
+                            Text(verbatim: layout.titleText)
                                 .font(layout.titleTextFont)
                                 .foregroundStyle(layout.titleTextColor)
                         } else {
-                            Text(verbatim: labelText)
+                            Text(verbatim: layout.titleText)
                                 .font(layout.titleTextFont)
                                 .foregroundColor(layout.titleTextColor)
                         }
@@ -105,11 +102,11 @@ public struct LabeledSegmentPickerView: View {
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -127,11 +124,11 @@ public struct LabeledSegmentPickerView: View {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -150,11 +147,11 @@ public struct LabeledSegmentPickerView: View {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -170,11 +167,11 @@ public struct LabeledSegmentPickerView: View {
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -198,7 +195,7 @@ public struct LabeledSegmentPickerView: View {
 #if os(iOS)
         Picker(
             selection: $selectedKey,
-            label: Text(labelText),
+            label: Text(layout.titleText),
             content: {
                 ForEach(items, id: \.key) { key, value in
                     Text(value)
@@ -213,7 +210,7 @@ public struct LabeledSegmentPickerView: View {
 #else
         Picker(
             selection: $selectedKey,
-            label: layout.alignment == .horizontal ? Text(labelText) : Text(""),
+            label: layout.alignment == .horizontal ? Text(layout.titleText) : Text(""),
             content: {
                 ForEach(items, id: \.key) { key, value in
                     Text(value)
@@ -245,6 +242,7 @@ extension LabeledSegmentPickerView {
         // MARK: - Properties
 
         let alignment: LabeleAlignment
+        let titleText: String
         let titleTextFont: Font
         let titleTextColor: Color
         let titleAlignment: HorizontalAlignment
@@ -258,6 +256,7 @@ extension LabeledSegmentPickerView {
 
         public init(
             alignment: LabeleAlignment = .vertical,
+            titleText: String = "",
             titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
             titleAlignment: HorizontalAlignment = .leading,
@@ -277,6 +276,7 @@ extension LabeledSegmentPickerView {
             cornerRadius: CGFloat = LayoutDefault.cornerRadius
         ) {
             self.alignment = alignment
+            self.titleText = titleText
             self.titleTextFont = titleTextFont
             self.titleTextColor = titleTextColor
             self.titleAlignment = titleAlignment
@@ -302,6 +302,7 @@ extension LabeledSegmentPickerView {
             layout: Layout
         ) {
             self.alignment = layout.alignment
+            self.titleText = layout.titleText
             self.titleTextFont = layout.titleTextFont
             self.titleTextColor = layout.titleTextColor
             self.titleAlignment = layout.titleAlignment
@@ -332,7 +333,6 @@ extension LabeledSegmentPickerView {
     VStack {
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -340,6 +340,7 @@ extension LabeledSegmentPickerView {
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .leading,
                 segmentSelectedTextColor: .white,
@@ -352,7 +353,6 @@ extension LabeledSegmentPickerView {
         )
         LabeledSegmentPickerView(
             selectedKey: "en",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -360,6 +360,7 @@ extension LabeledSegmentPickerView {
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .center,
                 segmentSelectedTextColor: .white,
@@ -372,7 +373,6 @@ extension LabeledSegmentPickerView {
         )
         LabeledSegmentPickerView(
             selectedKey: "jp",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -380,6 +380,7 @@ extension LabeledSegmentPickerView {
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .trailing,
                 segmentSelectedTextColor: .white,
@@ -392,7 +393,6 @@ extension LabeledSegmentPickerView {
         )
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -401,6 +401,7 @@ extension LabeledSegmentPickerView {
             pickerViewStyle: .palette,
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .horizontal,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .center,
                 segmentSelectedTextColor: .white, 
@@ -416,7 +417,6 @@ extension LabeledSegmentPickerView {
     VStack {
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -424,6 +424,7 @@ extension LabeledSegmentPickerView {
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .horizontal,
+                titleText: "Language",
                 titleTextColor: .green,
                 titleAlignment: .leading
             ),
@@ -433,7 +434,6 @@ extension LabeledSegmentPickerView {
         )
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -441,6 +441,7 @@ extension LabeledSegmentPickerView {
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .green,
                 titleAlignment: .leading
             ),

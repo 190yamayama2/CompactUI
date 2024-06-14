@@ -10,15 +10,20 @@ import SwiftUI
 
 public struct LabeledInputPasswordView: View {
 
-    // MARK: - Layout Property
+    // MARK: - Properties
 
+    @State var inputText: String
     let layout: Layout
-    var onSubmitText: ((String) -> Void)
+    let onSubmitText: ((String) -> Void)
+
+    // MARK: - Initializer
 
     public init(
+        inputText: String,
         layout: Layout,
         onSubmitText: @escaping (String) -> Void
     ) {
+        self.inputText = inputText
         self.layout = layout
         self.onSubmitText = onSubmitText
     }
@@ -35,7 +40,7 @@ public struct LabeledInputPasswordView: View {
                         .foregroundColor(layout.labelLayout.textForegroundColor)
                         .background(layout.labelLayout.backgroundColor)
                     GeneralPasswordTextView(
-                        secureText: layout.passwordText,
+                        secureText: inputText,
                         layout: GeneralPasswordTextView.Layout(
                             layout: layout.passwordLayout
                         ), 
@@ -58,7 +63,7 @@ public struct LabeledInputPasswordView: View {
                 HStack(alignment: .center, content: {
                     Spacer().frame(width: layout.leftMargin)
                     GeneralPasswordTextView(
-                        secureText: layout.passwordText,
+                        secureText: inputText,
                         layout: GeneralPasswordTextView.Layout(
                             layout: layout.passwordLayout
                         ),
@@ -87,7 +92,6 @@ extension LabeledInputPasswordView {
         // MARK: - Properties
 
         let labelText: String
-        let passwordText: String
         let alignment: LabeleAlignment
         let leftMargin: CGFloat
         let rightMargin: CGFloat
@@ -98,7 +102,6 @@ extension LabeledInputPasswordView {
 
         public init(
             labelText: String,
-            passwordText: String,
             alignment: LabeleAlignment = .vertical,
             leftMargin: CGFloat = LayoutDefault.leftMargin,
             rightMargin: CGFloat = LayoutDefault.rightMargin,
@@ -106,7 +109,6 @@ extension LabeledInputPasswordView {
             passwordLayout: GeneralPasswordTextView.Layout = GeneralPasswordTextView.Layout()
         ) {
             self.labelText = labelText
-            self.passwordText = passwordText
             self.alignment = alignment
             self.leftMargin = leftMargin
             self.rightMargin = rightMargin
@@ -118,7 +120,6 @@ extension LabeledInputPasswordView {
             layout: Layout
         ) {
             self.labelText = layout.labelText
-            self.passwordText = layout.passwordText
             self.alignment = layout.alignment
             self.leftMargin = layout.leftMargin
             self.rightMargin = layout.rightMargin
@@ -135,9 +136,9 @@ extension LabeledInputPasswordView {
 #if os(iOS)
     VStack {
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -149,9 +150,9 @@ extension LabeledInputPasswordView {
             }
         )
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -166,9 +167,9 @@ extension LabeledInputPasswordView {
 #else
     VStack {
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -180,9 +181,9 @@ extension LabeledInputPasswordView {
             }
         )
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(

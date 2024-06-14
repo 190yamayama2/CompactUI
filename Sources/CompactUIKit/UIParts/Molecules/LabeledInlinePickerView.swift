@@ -20,22 +20,19 @@ public struct LabeledInlinePickerView: View {
     // MARK: - Properties
 
     @State var selectedKey: String
-    let labelText: String
     let items: [(key: String, value: String)]
     let layout: Layout
-    var onSelected: ((String) -> Void)
+    let onSelected: ((String) -> Void)
 
     // MARK: - Initializer
 
     public init(
         selectedKey: String,
-        labelText: String,
         items: [(key: String, value: String)],
         layout: Layout = Layout(),
         onSelected: @escaping ((String) -> Void)
     ) {
         self.selectedKey = selectedKey
-        self.labelText = labelText
         self.items = items
         self.layout = layout
         self.onSelected = onSelected
@@ -52,11 +49,11 @@ public struct LabeledInlinePickerView: View {
                     HStack {
                         Spacer().frame(width: layout.leftMargin)
                             if #available(iOS 15.0, *) {
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundStyle(layout.titleTextColor)
                             } else {
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundColor(layout.titleTextColor)
                             }
@@ -79,11 +76,11 @@ public struct LabeledInlinePickerView: View {
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -95,11 +92,11 @@ public struct LabeledInlinePickerView: View {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -111,11 +108,11 @@ public struct LabeledInlinePickerView: View {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -126,11 +123,11 @@ public struct LabeledInlinePickerView: View {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
                                 if #available(iOS 15.0, *) {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundStyle(layout.titleTextColor)
                                 } else {
-                                    Text(verbatim: labelText)
+                                    Text(verbatim: layout.titleText)
                                         .font(layout.titleTextFont)
                                         .foregroundColor(layout.titleTextColor)
                                 }
@@ -152,7 +149,7 @@ public struct LabeledInlinePickerView: View {
 #if os(iOS)
         Picker(
             selection: $selectedKey,
-            label: Text(labelText),
+            label: Text(layout.titleText),
             content: {
                 ForEach(items, id: \.key) { key, value in
                     if #available(iOS 15.0, *) {
@@ -209,6 +206,7 @@ extension LabeledInlinePickerView {
         // MARK: - Properties
 
         let alignment: LabeleAlignment
+        let titleText: String
         let titleTextFont: Font
         let titleTextColor: Color
         let titleAlignment: HorizontalAlignment
@@ -220,6 +218,7 @@ extension LabeledInlinePickerView {
 
         public init(
             alignment: LabeleAlignment = .horizontal,
+            titleText: String = "",
             titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
             titleAlignment: HorizontalAlignment = .leading,
@@ -237,6 +236,7 @@ extension LabeledInlinePickerView {
             cornerRadius: CGFloat = LayoutDefault.cornerRadius
         ) {
             self.alignment = alignment
+            self.titleText = titleText
             self.titleTextFont = titleTextFont
             self.titleTextColor = titleTextColor
             self.titleAlignment = titleAlignment
@@ -260,6 +260,7 @@ extension LabeledInlinePickerView {
             layout: Layout
         ) {
             self.alignment = layout.alignment
+            self.titleText = layout.titleText
             self.titleTextFont = layout.titleTextFont
             self.titleTextColor = layout.titleTextColor
             self.titleAlignment = layout.titleAlignment
@@ -289,14 +290,14 @@ extension LabeledInlinePickerView {
     VStack {
         LabeledInlinePickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledInlinePickerView.Layout(
-                alignment: .horizontal
+                alignment: .horizontal,
+                titleText: "Language"
             ),
             onSelected: { value in
                 print(value)
@@ -304,14 +305,14 @@ extension LabeledInlinePickerView {
         )
         LabeledInlinePickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledInlinePickerView.Layout(
-                alignment: .vertical
+                alignment: .vertical,
+                titleText: "Language"
             ),
             onSelected: { value in
                 print(value)
@@ -322,14 +323,14 @@ extension LabeledInlinePickerView {
     VStack {
         LabeledInlinePickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledInlinePickerView.Layout(
-                alignment: .horizontal
+                alignment: .horizontal,
+                titleText: "Language"
             ),
             onSelected: { value in
                 print(value)
@@ -337,7 +338,6 @@ extension LabeledInlinePickerView {
         )
         LabeledInlinePickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -345,6 +345,7 @@ extension LabeledInlinePickerView {
             ],
             layout: LabeledInlinePickerView.Layout(
                 alignment: .vertical, 
+                titleText: "Language",
                 titleTextColor: .white,
                 titleAlignment: .center
             ),
