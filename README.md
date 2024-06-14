@@ -515,81 +515,251 @@ public static var cornerRadius: CGFloat = 16
 
 # Molecules
 
-## LabeledInputTextView sample
+## LabeledDropdownListView sample
 
 | iOS | MacOS |
 | --- | --- |
-| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/8708588a-2a92-4ee9-8734-aef4a138f744"> | <img width="611" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/df1cce0d-18b5-430a-a5cd-60d707651366"> |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/6107fad2-398d-4ebc-84b1-8f65e2b9c5bb"> | <img width="605" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/41c40d6b-ea8a-4858-a457-cd989eb74eb3"> |
 
 <details><summary>example code</summary>
 
 ```swift
 #if os(iOS)
     VStack {
-        LabeledInputTextView(
-            layout: LabeledInputTextView.Layout(
-                labelText: "Please enter account id.",
-                inputText: "",
-                alignment: .horizontal,
-                labelLayout: BaseLabelLayout(
-                    textForegroundColor: .gray
-                ),
-                textLayout: GeneralTextView.Layout(
-                    placeholder: "Please enter your name."
-                )
+        LabeledDropdownListView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language",
+                titleAlignment: .leading
             ),
-            onSubmitText: { value  in
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "en",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language",
+                titleAlignment: .center
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "jp",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language",
+                titleAlignment: .trailing
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+    }
+#else
+    VStack {
+        LabeledDropdownListView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "en",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "jp",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "en",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+        LabeledDropdownListView(
+            selectedKey: "jp",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledDropdownListView.Layout(
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
+        )
+    }
+#endif
+```
+</details>
+
+## LabeledInlinePickerView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="298" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/de8572ef-49fc-46ce-835f-bb91ee7adb24"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/692bd8ad-d18b-46e3-945d-0a62cdb32ce2"> |
+
+<details><summary>example code</summary>
+
+```swift
+#if os(iOS)
+    VStack {
+        LabeledInlinePickerView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledInlinePickerView.Layout(
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { value in
                 print(value)
             }
         )
-        LabeledInputTextView(
-            layout: LabeledInputTextView.Layout(
-                labelText: "Please enter account id.",
-                inputText: "",
+        LabeledInlinePickerView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledInlinePickerView.Layout(
                 alignment: .vertical,
-                labelLayout: BaseLabelLayout(
-                    textForegroundColor: .gray
-                ),
-                textLayout: GeneralTextView.Layout(
-                    placeholder: "Please enter your name."
-                )
+                titleText: "Language"
             ),
-            onSubmitText: { value  in
+            onSelected: { value in
                 print(value)
             }
         )
     }
 #else
     VStack {
-        LabeledInputTextView(
-            layout: LabeledInputTextView.Layout(
-                labelText: "Please enter account id.",
-                inputText: "",
+        LabeledInlinePickerView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledInlinePickerView.Layout(
                 alignment: .horizontal,
-                labelLayout: BaseLabelLayout(
-                    textForegroundColor: .gray
-                ),
-                textLayout: GeneralTextView.Layout(
-                    placeholder: "Please enter your name."
-                )
+                titleText: "Language"
             ),
-            onSubmitText: { value  in
+            onSelected: { value in
                 print(value)
             }
         )
-        LabeledInputTextView(
-            layout: LabeledInputTextView.Layout(
-                labelText: "Please enter account id.",
-                inputText: "",
-                alignment: .vertical,
-                labelLayout: BaseLabelLayout(
-                    textForegroundColor: .gray
-                ),
-                textLayout: GeneralTextView.Layout(
-                    placeholder: "Please enter your name."
-                )
+        LabeledInlinePickerView(
+            selectedKey: "default",
+            items: [
+                (key: "default", value: "System"),
+                (key: "en", value: "English"),
+                (key: "jp", value: "Japanese")
+            ],
+            layout: LabeledInlinePickerView.Layout(
+                alignment: .vertical, 
+                titleText: "Language",
+                titleTextColor: .white,
+                titleAlignment: .center
             ),
-            onSubmitText: { value  in
+            onSelected: { value in
                 print(value)
             }
         )
@@ -610,9 +780,9 @@ public static var cornerRadius: CGFloat = 16
 #if os(iOS)
     VStack {
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -624,9 +794,9 @@ public static var cornerRadius: CGFloat = 16
             }
         )
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -641,9 +811,9 @@ public static var cornerRadius: CGFloat = 16
 #else
     VStack {
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .horizontal,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
@@ -655,13 +825,96 @@ public static var cornerRadius: CGFloat = 16
             }
         )
         LabeledInputPasswordView(
+            inputText: "",
             layout: LabeledInputPasswordView.Layout(
                 labelText: "Please enter password.",
-                passwordText: "",
                 alignment: .vertical,
                 labelLayout: BaseLabelLayout(textForegroundColor: .gray),
                 passwordLayout: GeneralPasswordTextView.Layout(
                     placeholder: "8 to 16 half-width alphanumeric characters."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+    }
+#endif
+```
+</details>
+
+## LabeledInputTextView sample
+
+| iOS | MacOS |
+| --- | --- |
+| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/8708588a-2a92-4ee9-8734-aef4a138f744"> | <img width="611" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/df1cce0d-18b5-430a-a5cd-60d707651366"> |
+
+<details><summary>example code</summary>
+
+```swift
+#if os(iOS)
+    VStack {
+        LabeledInputTextView(
+            inputText: "",
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: GeneralTextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        LabeledInputTextView(
+            inputText: "",
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: GeneralTextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+    }
+#else
+    VStack {
+        LabeledInputTextView(
+            inputText: "",
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                alignment: .horizontal,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: GeneralTextView.Layout(
+                    placeholder: "Please enter your name."
+                )
+            ),
+            onSubmitText: { value  in
+                print(value)
+            }
+        )
+        LabeledInputTextView(
+            inputText: "",
+            layout: LabeledInputTextView.Layout(
+                labelText: "Please enter account id.",
+                alignment: .vertical,
+                labelLayout: BaseLabelLayout(
+                    textForegroundColor: .gray
+                ),
+                textLayout: GeneralTextView.Layout(
+                    placeholder: "Please enter your name."
                 )
             ),
             onSubmitText: { value  in
@@ -686,7 +939,6 @@ public static var cornerRadius: CGFloat = 16
     VStack {
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -694,6 +946,7 @@ public static var cornerRadius: CGFloat = 16
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .leading,
                 segmentSelectedTextColor: .white,
@@ -706,7 +959,6 @@ public static var cornerRadius: CGFloat = 16
         )
         LabeledSegmentPickerView(
             selectedKey: "en",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -714,6 +966,7 @@ public static var cornerRadius: CGFloat = 16
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .center,
                 segmentSelectedTextColor: .white,
@@ -726,7 +979,6 @@ public static var cornerRadius: CGFloat = 16
         )
         LabeledSegmentPickerView(
             selectedKey: "jp",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -734,6 +986,7 @@ public static var cornerRadius: CGFloat = 16
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .trailing,
                 segmentSelectedTextColor: .white,
@@ -746,7 +999,6 @@ public static var cornerRadius: CGFloat = 16
         )
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -755,6 +1007,7 @@ public static var cornerRadius: CGFloat = 16
             pickerViewStyle: .palette,
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .horizontal,
+                titleText: "Language",
                 titleTextColor: .gray,
                 titleAlignment: .center,
                 segmentSelectedTextColor: .white, 
@@ -770,7 +1023,6 @@ public static var cornerRadius: CGFloat = 16
     VStack {
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -778,6 +1030,7 @@ public static var cornerRadius: CGFloat = 16
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .horizontal,
+                titleText: "Language",
                 titleTextColor: .green,
                 titleAlignment: .leading
             ),
@@ -787,7 +1040,6 @@ public static var cornerRadius: CGFloat = 16
         )
         LabeledSegmentPickerView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -795,235 +1047,13 @@ public static var cornerRadius: CGFloat = 16
             ],
             layout: LabeledSegmentPickerView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleTextColor: .green,
                 titleAlignment: .leading
             ),
             onSelected: { value in
                 print(value)
             }
-        )
-    }
-#endif
-```
-</details>
-
-## LabeledInlinePickerView sample
-
-| iOS | MacOS |
-| --- | --- |
-| <img width="298" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/de8572ef-49fc-46ce-835f-bb91ee7adb24"> | <img width="608" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/692bd8ad-d18b-46e3-945d-0a62cdb32ce2"> |
-
-<details><summary>example code</summary>
-
-```swift
-#if os(iOS)
-    VStack {
-        LabeledInlinePickerView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledInlinePickerView.Layout(
-                alignment: .horizontal
-            ),
-            onSelected: { value in
-                print(value)
-            }
-        )
-        LabeledInlinePickerView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledInlinePickerView.Layout(
-                alignment: .vertical
-            ),
-            onSelected: { value in
-                print(value)
-            }
-        )
-    }
-#else
-    VStack {
-        LabeledInlinePickerView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledInlinePickerView.Layout(
-                alignment: .horizontal
-            ),
-            onSelected: { value in
-                print(value)
-            }
-        )
-        LabeledInlinePickerView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledInlinePickerView.Layout(
-                alignment: .vertical, 
-                titleTextColor: .white,
-                titleAlignment: .center
-            ),
-            onSelected: { value in
-                print(value)
-            }
-        )
-    }
-#endif
-```
-</details>
-
-## LabeledDropdownListView sample
-
-| iOS | MacOS |
-| --- | --- |
-| <img width="300" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/6107fad2-398d-4ebc-84b1-8f65e2b9c5bb"> | <img width="605" alt="image" src="https://github.com/190yamayama2/CompactUI/assets/154570413/41c40d6b-ea8a-4858-a457-cd989eb74eb3"> |
-
-<details><summary>example code</summary>
-
-```swift
-#if os(iOS)
-    VStack {
-        LabeledDropdownListView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical,
-                titleAlignment: .leading
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "en",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical,
-                titleAlignment: .center
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "jp",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical,
-                titleAlignment: .trailing
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
-        )
-    }
-#else
-    VStack {
-        LabeledDropdownListView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "en",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "jp",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "default",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "en",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
-        )
-        LabeledDropdownListView(
-            selectedKey: "jp",
-            labelText: "Language",
-            items: [
-                (key: "default", value: "System"),
-                (key: "en", value: "English"),
-                (key: "jp", value: "Japanese")
-            ],
-            layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
         )
     }
 #endif

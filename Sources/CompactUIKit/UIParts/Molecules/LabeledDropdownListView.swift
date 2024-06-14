@@ -21,22 +21,22 @@ public struct LabeledDropdownListView: View {
     // MARK: - Properties
 
     @State var selectedKey: String
-    let labelText: String
     let items: [(key: String, value: String)]
     let layout: Layout
+    let onSelected: ((String) -> Void)
 
     // MARK: - Initializer
 
     public init(
         selectedKey: String,
-        labelText: String,
         items: [(key: String, value: String)],
-        layout: Layout = Layout()
+        layout: Layout = Layout(),
+        onSelected: @escaping ((String) -> Void)
     ) {
         self.selectedKey = selectedKey
-        self.labelText = labelText
         self.items = items
         self.layout = layout
+        self.onSelected = onSelected
     }
 
     // MARK: - View
@@ -48,7 +48,7 @@ public struct LabeledDropdownListView: View {
                 case .horizontal:
                     HStack {
                         Spacer().frame(width: layout.leftMargin)
-                        Text(verbatim: labelText)
+                        Text(verbatim: layout.titleText)
                             .font(layout.titleTextFont)
                             .foregroundStyle(layout.titleTextColor)
                         picker
@@ -60,7 +60,7 @@ public struct LabeledDropdownListView: View {
                         case .leading:
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundStyle(layout.titleTextColor)
                                 Spacer()
@@ -70,7 +70,7 @@ public struct LabeledDropdownListView: View {
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundStyle(layout.titleTextColor)
                                 Spacer()
@@ -80,7 +80,7 @@ public struct LabeledDropdownListView: View {
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
                                 Spacer()
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundStyle(layout.titleTextColor)
                                 Spacer().frame(width: layout.rightMargin)
@@ -88,7 +88,7 @@ public struct LabeledDropdownListView: View {
                         default:
                             HStack {
                                 Spacer().frame(width: layout.leftMargin)
-                                Text(verbatim: labelText)
+                                Text(verbatim: layout.titleText)
                                     .font(layout.titleTextFont)
                                     .foregroundStyle(layout.titleTextColor)
                                 Spacer()
@@ -116,6 +116,9 @@ public struct LabeledDropdownListView: View {
                         .tag(key)
                 }
             })
+            .onChange(of: selectedKey) { newValue in
+                onSelected(newValue)
+            }
         } label: {
             Text(items.first(where: { $0.key == selectedKey})?.value ?? "")
                 .font(layout.selectionTextFont)
@@ -130,6 +133,9 @@ public struct LabeledDropdownListView: View {
                     .tag(key)
             }
         })
+        .onChange(of: selectedKey) { newValue in
+            onSelected(newValue)
+        }
 #endif
     }
 
@@ -142,6 +148,7 @@ extension LabeledDropdownListView {
         // MARK: - Properties
 
         let alignment: LabeleAlignment
+        let titleText: String
         let titleTextFont: Font
         let titleTextColor: Color
         let titleAlignment: HorizontalAlignment
@@ -153,6 +160,7 @@ extension LabeledDropdownListView {
 
         public init(
             alignment: LabeleAlignment = .horizontal,
+            titleText: String = "",
             titleTextFont: Font = LayoutDefault.primaryFont,
             titleTextColor: Color = LayoutDefault.primaryFontColor,
             titleAlignment: HorizontalAlignment = .leading,
@@ -170,6 +178,7 @@ extension LabeledDropdownListView {
             cornerRadius: CGFloat = LayoutDefault.cornerRadius
         ) {
             self.alignment = alignment
+            self.titleText = titleText
             self.titleTextFont = titleTextFont
             self.titleTextColor = titleTextColor
             self.titleAlignment = titleAlignment
@@ -193,6 +202,7 @@ extension LabeledDropdownListView {
             layout: Layout
         ) {
             self.alignment = layout.alignment
+            self.titleText = layout.titleText
             self.titleTextFont = layout.titleTextFont
             self.titleTextColor = layout.titleTextColor
             self.titleAlignment = layout.titleAlignment
@@ -222,7 +232,6 @@ extension LabeledDropdownListView {
     VStack {
         LabeledDropdownListView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -230,12 +239,15 @@ extension LabeledDropdownListView {
             ],
             layout: LabeledDropdownListView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleAlignment: .leading
-            )
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "en",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -243,12 +255,15 @@ extension LabeledDropdownListView {
             ],
             layout: LabeledDropdownListView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleAlignment: .center
-            )
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "jp",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
@@ -256,95 +271,120 @@ extension LabeledDropdownListView {
             ],
             layout: LabeledDropdownListView.Layout(
                 alignment: .vertical,
+                titleText: "Language",
                 titleAlignment: .trailing
-            )
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
     }
 #else
     VStack {
         LabeledDropdownListView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "en",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "jp",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .horizontal
-            )
+                alignment: .horizontal,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "default",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "en",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
         LabeledDropdownListView(
             selectedKey: "jp",
-            labelText: "Language",
             items: [
                 (key: "default", value: "System"),
                 (key: "en", value: "English"),
                 (key: "jp", value: "Japanese")
             ],
             layout: LabeledDropdownListView.Layout(
-                alignment: .vertical
-            )
+                alignment: .vertical,
+                titleText: "Language"
+            ),
+            onSelected: { newValue in
+                print("\(newValue)")
+            }
         )
     }
 #endif
