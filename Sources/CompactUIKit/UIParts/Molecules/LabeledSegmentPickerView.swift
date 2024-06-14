@@ -204,8 +204,8 @@ public struct LabeledSegmentPickerView: View {
             }
         )
         .pickerStyle(.segmented)
-        .onSubmit(of: .text) {
-            onSelected(selectedKey)
+        .onChange(of: selectedKey) { newValue in
+            onSelected(newValue)
         }
 #else
         Picker(
@@ -219,8 +219,8 @@ public struct LabeledSegmentPickerView: View {
             }
         )
         .pickerStyle(.segmented)
-        .onSubmit(of: .text) {
-            onSelected(selectedKey)
+        .onChange(of: selectedKey) { newValue in
+            onSelected(newValue)
         }
 #endif
     }
