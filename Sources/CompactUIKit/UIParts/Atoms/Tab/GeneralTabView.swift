@@ -17,6 +17,7 @@ public struct GeneralTabView<Content: View>: View {
     private var tabCount: CGFloat {
         CGFloat(tabContents.count)
     }
+    let onChangeTab: ((Int) -> Void)
 
     // MARK: - Layout Property
 
@@ -27,11 +28,13 @@ public struct GeneralTabView<Content: View>: View {
     public init(
         tabContents: [TabContent<Content>],
         selection: Int,
-        layout: Layout = Layout()
+        layout: Layout = Layout(),
+        onChangeTab: @escaping ((Int) -> Void)
     ) {
         self.tabContents = tabContents
         self.selection = selection
         self.layout = layout
+        self.onChangeTab = onChangeTab
         if tabContents.count < layout.displayTabCount.rawValue {
             fatalError("Insufficient number of tab contents to display.Please set contentsCount and displayTabCount to the correct values.")
         }
@@ -53,6 +56,9 @@ public struct GeneralTabView<Content: View>: View {
                         tabContent.content
                             .tag(tabContent.id)
                     }
+                }
+                .onChange(of: selection) { newValue in
+                    onChangeTab(newValue)
                 }
 #if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -189,7 +195,10 @@ private struct PageView: View {
                 )
             ],
             selection: 1,
-            layout: .init(displayTabCount: .three)
+            layout: .init(displayTabCount: .three), 
+            onChangeTab: { index in
+                print("index=\(index)")
+            }
         )
         GeneralTabView(
             tabContents: [
@@ -220,7 +229,10 @@ private struct PageView: View {
                 )
             ],
             selection: 3,
-            layout: .init(displayTabCount: .four)
+            layout: .init(displayTabCount: .four),
+            onChangeTab: { index in
+                print("index=\(index)")
+            }
         )
     }
 }
