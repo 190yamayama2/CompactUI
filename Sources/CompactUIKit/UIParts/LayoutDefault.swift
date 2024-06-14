@@ -85,25 +85,25 @@ public struct LayoutDefault {
     /// Default sliderColor
     public static var sliderColor: Color = .blue
 
-    /// Default tabWidth
+    /// Default displayTabCount
     public static var displayTabCount: DisplayTabCount = .four
 
     /// Default tabWidth
     public static var tabWidth: CGFloat = 80.0
 
-    /// Default tabWidth
+    /// Default tabHeight
     public static var tabHeight: CGFloat = 40.0
 
-    /// Default primaryFont
+    /// Default selectedTabFont
     public static var selectedTabFont: Font = .system(size: 14.0).bold()
 
-    /// Default primaryFontColor
+    /// Default selectedTabFontColor
     public static var selectedTabFontColor: Color = isDarkMode ? .white : .gray
 
-    /// Default primaryFont
+    /// Default tabFont
     public static var tabFont: Font = .system(size: 12.0)
 
-    /// Default primaryFontColor
+    /// Default tabFontColor
     public static var tabFontColor: Color = isDarkMode ? .white : .gray
 
 }
